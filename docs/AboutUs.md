@@ -48,5 +48,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/ash-l7)]
 [[portfolio](team/ash-l7.md)]
 
-* Role: Developer
-* Responsibilities: UI
+* Role: Developer, Snoozer
+* Responsibilities: Testing, Hibernate
