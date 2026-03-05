@@ -26,7 +26,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[homepage](https://www.comp.nus.edu.sg/~zihuan/)]
 [[github](https://github.com/gluee003)]
 
-* Role: Sweatshop Worker 1
+* Role: Developer
+* Responsibilities: Backend Logic
 
 ### Reiner Ong Zheng Han
 
