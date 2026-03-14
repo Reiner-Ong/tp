@@ -3,7 +3,9 @@ package seedu.address.model.contact;
 import java.time.LocalTime;
 import java.util.Set;
 
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents an Attraction Contact in the address book.
@@ -47,5 +49,27 @@ public class Attraction extends Contact {
      */
     public LocalTime[] getOperatingHours() {
         return new LocalTime[]{ this.openingHours, this.closingHours };
+    }
+
+    @Override
+    public String getType() {
+        return "Attraction";
+    }
+
+    /**
+     * Returns a copy of the contact with its values edited.
+     */
+    @Override
+    public Contact edit(EditCommand.EditContactDescriptor editAttractionDescriptor) {
+        Name updatedName = editAttractionDescriptor.getName().orElse(getName());
+        Phone updatedPhone = editAttractionDescriptor.getPhone().orElse(getPhone());
+        Email updatedEmail = editAttractionDescriptor.getEmail().orElse(getEmail());
+        Address updatedAddress = editAttractionDescriptor.getAddress().orElse(getAddress());
+        Set<Tag> updatedTags = editAttractionDescriptor.getTags().orElse(getTags());
+        LocalTime updatedOpeningHours = editAttractionDescriptor.getOpeningHours().orElse(getOpeningHours());
+        LocalTime updatedClosingHours = editAttractionDescriptor.getClosingHours().orElse(getClosingHours());
+
+        return new Attraction(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedOpeningHours, updatedClosingHours);
     }
 }

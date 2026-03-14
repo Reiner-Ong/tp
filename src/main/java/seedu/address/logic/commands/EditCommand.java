@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.contact.Accommodation;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
@@ -132,6 +134,11 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private boolean isHalal;
+        private LocalTime openingHours;
+        private LocalTime closingHours;
+        private Accommodation.AccommodationStar stars;
+
 
         public EditContactDescriptor() {}
 
@@ -145,6 +152,10 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setHalal(toCopy.isHalal);
+            setOpeningHours(toCopy.openingHours);
+            setClosingHours(toCopy.closingHours);
+            setStars(toCopy.stars);
         }
 
         /**
@@ -203,6 +214,39 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public Optional<Boolean> isHalal() {
+            return Optional.of(this.isHalal);
+        }
+
+        public void setHalal(boolean isHalal) {
+            this.isHalal = isHalal;
+        }
+
+        public Optional<LocalTime> getOpeningHours() {
+            return Optional.ofNullable(openingHours);
+        }
+
+        public void setOpeningHours(LocalTime openingHours) {
+            this.openingHours = openingHours;
+        }
+
+        public Optional<LocalTime> getClosingHours() {
+            return Optional.ofNullable(closingHours);
+        }
+
+        public void setClosingHours(LocalTime closingHours) {
+            this.closingHours = closingHours;
+        }
+
+
+        public Optional<Accommodation.AccommodationStar> getStars() {
+            return Optional.ofNullable(stars);
+        }
+
+        public void setStars(Accommodation.AccommodationStar stars) {
+            this.stars = stars;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -219,7 +263,11 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditContactDescriptor.phone)
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
-                    && Objects.equals(tags, otherEditContactDescriptor.tags);
+                    && Objects.equals(tags, otherEditContactDescriptor.tags)
+                    && Objects.equals(isHalal, otherEditContactDescriptor.isHalal)
+                    && Objects.equals(openingHours, otherEditContactDescriptor.openingHours)
+                    && Objects.equals(closingHours, otherEditContactDescriptor.closingHours)
+                    && Objects.equals(stars, otherEditContactDescriptor.stars);
         }
 
         @Override
@@ -230,6 +278,10 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("isHalal", isHalal)
+                    .add("openingHours", openingHours)
+                    .add("closingHours", closingHours)
+                    .add("stars", stars)
                     .toString();
         }
     }
