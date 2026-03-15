@@ -108,9 +108,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 contact = new Accommodation(name, phone, email, address, tagList, stars);
             } else {
                 contact = new Accommodation(name, phone, email, address, tagList);
-
-            }        }
-
+            }
+        }
         return new AddCommand(contact);
     }
 
