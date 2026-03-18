@@ -3,10 +3,12 @@ package seedu.address.model.contact;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ATTRACTION;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -20,8 +22,8 @@ public class Attraction extends Contact {
     /**
      * Constructs an {@code Attraction} contact with default operating hours (8am to 10pm).
      */
-    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.openingHour = new OpeningHour("08:00");
         this.closingHour = new ClosingHour("22:00");
     }
@@ -29,8 +31,9 @@ public class Attraction extends Contact {
     /**
      * Constructs an {@code Attraction} contact with default opening hour (8am).
      */
-    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ClosingHour closingHour) {
-        super(name, phone, email, address, tags);
+    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ClosingHour closingHour,
+                      Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.openingHour = new OpeningHour("08:00");
         this.closingHour = closingHour;
     }
@@ -38,8 +41,9 @@ public class Attraction extends Contact {
     /**
      * Constructs an {@code Attraction} contact with default closing hour (10pm).
      */
-    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags, OpeningHour openingHour) {
-        super(name, phone, email, address, tags);
+    public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags, OpeningHour openingHour,
+                      Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.openingHour = openingHour;
         this.closingHour = new ClosingHour("22:00");
     }
@@ -50,8 +54,8 @@ public class Attraction extends Contact {
      * @param closingHour The closing hours of the attraction.
      */
     public Attraction(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                         OpeningHour openingHour, ClosingHour closingHour) {
-        super(name, phone, email, address, tags);
+                         OpeningHour openingHour, ClosingHour closingHour, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.openingHour = openingHour;
         this.closingHour = closingHour;
     }
@@ -88,8 +92,17 @@ public class Attraction extends Contact {
         Set<Tag> updatedTags = editAttractionDescriptor.getTags().orElse(getTags());
         OpeningHour updatedOpeningHour = editAttractionDescriptor.getOpeningHour().orElse(getOpeningHour());
         ClosingHour updatedClosingHour = editAttractionDescriptor.getClosingHour().orElse(getClosingHour());
+        Set<Tour> updatedTours = editAttractionDescriptor.getTours().orElse(getTours());
 
         return new Attraction(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedOpeningHour, updatedClosingHour);
+                updatedOpeningHour, updatedClosingHour, updatedTours);
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of(
+                openingHour.toString(),
+                closingHour.toString()
+        );
     }
 }

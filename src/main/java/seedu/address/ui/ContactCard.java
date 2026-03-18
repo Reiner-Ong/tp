@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.contact.Contact;
 
 /**
@@ -40,6 +41,8 @@ public class ContactCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private VBox detailsBox;
 
     /**
      * Creates a {@code ContactCode} with the given {@code Contact} and index to display.
@@ -55,5 +58,9 @@ public class ContactCard extends UiPart<Region> {
         contact.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        contact.getTypeSpecificDetails().forEach(detail -> {
+                Label label = new Label(detail);
+                label.getStyleClass().add("cell_small_label");
+                detailsBox.getChildren().add(label);});
     }
 }

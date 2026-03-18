@@ -2,10 +2,12 @@ package seedu.address.model.contact;
 
 import static seedu.address.logic.parser.CliSyntax.TYPE_FNB;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -18,8 +20,8 @@ public class Fnb extends Contact {
     /**
      * Constructs an {@code Fnb} contact with default Halal status (false).
      */
-    public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        super(name, phone, email, address, tags);
+    public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.isHalal = new HalalStatus("false");
     }
 
@@ -27,8 +29,9 @@ public class Fnb extends Contact {
      * Constructs an {@code Fnb} contact with specified Halal status.
      * @param isHalal A Halal status.
      */
-    public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags, HalalStatus isHalal) {
-        super(name, phone, email, address, tags);
+    public Fnb(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+               HalalStatus isHalal, Set<Tour> tours) {
+        super(name, phone, email, address, tags, tours);
         this.isHalal = isHalal;
     }
 
@@ -38,6 +41,10 @@ public class Fnb extends Contact {
 
     public HalalStatus getHalalStatus() {
         return this.isHalal;
+    }
+
+    public Set<Tour> getTours() {
+        return super.getTours();
     }
 
     @Override
@@ -56,6 +63,13 @@ public class Fnb extends Contact {
         Address updatedAddress = editFnbDescriptor.getAddress().orElse(getAddress());
         Set<Tag> updatedTags = editFnbDescriptor.getTags().orElse(getTags());
         HalalStatus updatedHalalStatus = editFnbDescriptor.getHalalStatus().orElse(getHalalStatus());
-        return new Fnb(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedHalalStatus);
+        Set<Tour> updatedTours = editFnbDescriptor.getTours().orElse(getTours());
+        return new Fnb(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedHalalStatus, updatedTours);
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of(isHalal.toString());
     }
 }

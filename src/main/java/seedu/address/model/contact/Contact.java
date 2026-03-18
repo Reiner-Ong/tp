@@ -2,14 +2,12 @@ package seedu.address.model.contact;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * Represents a Contact in the address book.
@@ -25,19 +23,21 @@ public abstract class Contact {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tour> tours = new HashSet<>();
 
     /**
      * Constructs a {@code Contact}.
      * Forms the base for instantiating the Contact subclasses.
      * Every field must be present and not null.
      */
-    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Contact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Tour> tours) {
+        requireAllNonNull(name, phone, email, address, tags, tours);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.tours.addAll(tours);
     }
 
     public Name getName() {
@@ -65,6 +65,21 @@ public abstract class Contact {
     }
 
     /**
+     * Returns true if the contact is in the given tour.
+     */
+    public boolean isInTour(Tour tour) {
+        return tours.contains(tour);
+    }
+
+    /**
+     * Returns an immutable tour set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tour> getTours () {
+        return Collections.unmodifiableSet(tours);
+    }
+
+    /**
      * Returns true if both contacts have the same name.
      * This defines a weaker notion of equality between two contacts.
      */
@@ -87,6 +102,8 @@ public abstract class Contact {
      */
     public abstract String getType();
 
+    public abstract List<String> getTypeSpecificDetails();
+
     /**
      * Returns true if both contacts have the same identity and data fields.
      * This defines a stronger notion of equality between two contacts.
@@ -107,7 +124,8 @@ public abstract class Contact {
                 && phone.equals(otherContact.phone)
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
-                && tags.equals(otherContact.tags);
+                && tags.equals(otherContact.tags)
+                && tours.equals(otherContact.tours);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -152,7 +149,7 @@ class JsonAdaptedContact {
         final Set<Tag> modelTags = new HashSet<>(contactTags);
 
         if (type.equals(Person.class.getSimpleName())) {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, Collections.emptySet());
         }
 
         if (type.equals(Fnb.class.getSimpleName())) {
