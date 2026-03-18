@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
@@ -35,6 +36,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 
 /**
@@ -56,6 +58,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_OPENING_HOUR + "OPENING HOUR (for Attraction contacts)] \n"
             + "[" + PREFIX_CLOSING_HOUR + "CLOSING HOUR (for Attraction contacts)] "
             + "[" + PREFIX_STARS + "STARS (for for Accommodations)] "
+            + "[" + PREFIX_TOUR + "TOUR]... "
             + "[" + PREFIX_TAG + "TAG]... \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -149,6 +152,7 @@ public class EditCommand extends Command {
         private OpeningHour openingHour;
         private ClosingHour closingHour;
         private AccommodationStars stars;
+        private Set<Tour> tours;
 
 
         public EditContactDescriptor() {}
@@ -163,6 +167,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setTours(toCopy.tours);
             setHalal(toCopy.isHalal);
             setOpeningHour(toCopy.openingHour);
             setClosingHour(toCopy.closingHour);
@@ -173,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tours,
                     isHalal, openingHour, closingHour, stars);
         }
 
@@ -259,6 +264,29 @@ public class EditCommand extends Command {
             this.stars = stars;
         }
 
+        /**
+         * Sets the tours of the contact being edited.
+         * A defensive copy of {@code tours} is used to prevent external modifications.
+         * {@code null} indicates that the tours field was not specified in the edit command
+         * and the contact's existing tours should remain unchanged.
+         *
+         * @param tours the new set of tours, or {@code null} if unspecified
+         */
+        public void setTours(Set<Tour> tours) {
+            this.tours = (tours != null) ? new HashSet<>(tours) : null;
+        }
+
+        /**
+         * Returns the tours of the contact being edited.
+         * Returns {@code Optional.empty()} if tours were not specified in the edit command.
+         *
+         * @return an {@code Optional} containing the new set of tours, or {@code Optional.empty()} if unspecified
+         */
+        public Optional<Set<Tour>> getTours() {
+            return (tours != null) ? Optional.of(Collections.unmodifiableSet(tours)) : Optional.empty();
+        }
+
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -276,6 +304,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditContactDescriptor.email)
                     && Objects.equals(address, otherEditContactDescriptor.address)
                     && Objects.equals(tags, otherEditContactDescriptor.tags)
+                    && Objects.equals(tours, otherEditContactDescriptor.tours)
                     && Objects.equals(isHalal, otherEditContactDescriptor.isHalal)
                     && Objects.equals(openingHour, otherEditContactDescriptor.openingHour)
                     && Objects.equals(closingHour, otherEditContactDescriptor.closingHour)
@@ -294,6 +323,7 @@ public class EditCommand extends Command {
                     .add("openingHour", openingHour)
                     .add("closingHour", closingHour)
                     .add("stars", stars)
+                    .add("tours", tours)
                     .toString();
         }
     }

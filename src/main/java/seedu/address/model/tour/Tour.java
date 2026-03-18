@@ -1,66 +1,77 @@
 package seedu.address.model.tour;
 
-import seedu.address.model.contact.Contact;
-import seedu.address.model.contact.UniqueContactList;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
+
 
 /**
- * Represents a tour package, which is associated with a collection of contacts associated with the tour.
+ * Represents a tour package, which is identified by its String name
  */
 public class Tour {
-    private final UniqueContactList contacts = new UniqueContactList();
+    public static final String MESSAGE_CONSTRAINTS = "Tour names should not have special characters.";
+    public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]+$";
+
+    public final String tourName;
 
     /**
-     * Adds a contact to the tour.
-     * The contact must not exist in the tour.
+     * Constructs a {@code Tour} with the given name.
+     *
+     * @param tourName the name of the tour
      */
-    public void add(Contact contact) {
-        contacts.add(contact);
+    public Tour(String tourName) {
+        requireNonNull(tourName);
+        checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
+        this.tourName = tourName;
     }
 
     /**
-     * Returns true if the tour contains an equivalent contact as the given argument.
+     * Returns true if a given string is a valid tour name.
      */
-    public boolean contains(Contact contact) {
-        return contacts.contains(contact);
+    public static boolean isValidTourName(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Replaces the contact {@code target} in the tour with {@code editedContact}.
-     * {@code target} must exist in the tour.
-     * The contact identity of {@code editedContact} must not be the same as another existing contact in the tour.
+     * Returns the name of the tour.
+     *
+     * @return the tour name as a {@code String}
      */
-    public void setContact(Contact target, Contact editedContact) {
-        contacts.setContact(target, editedContact);
+    public String getTourName() {
+        return tourName;
     }
 
     /**
-     * Removes the equivalent contact from the tour.
-     * The contact must exist in the tour.
+     * Returns the hash code of this tour, based on its name.
+     *
+     * @return hash code derived from the tour name
      */
-    public void remove(Contact toRemove) {
-        contacts.remove(toRemove);
+    @Override
+    public int hashCode() {
+        return Objects.hash(tourName);
     }
 
     /**
-     * Replaces the contents of this tour with {@code replacement}.
+     * Returns true if both tours have the same name.
+     * This defines equality between two {@code Tour} objects.
+     *
+     * @param other the object to compare to
+     * @return true if {@code other} is a {@code Tour} with the same name
      */
-    public void setContacts(Tour replacement) {
-        contacts.setContacts(replacement.contacts);
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
         if (other instanceof Tour tour) {
-            return this.contacts.equals(tour.contacts);
+            return this.tourName.equals(tour.getTourName());
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return String.format("Tour(%s)", contacts);
+        return tourName;
     }
 }

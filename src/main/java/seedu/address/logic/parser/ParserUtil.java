@@ -19,6 +19,7 @@ import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -140,6 +141,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code Collection<String>} of tours into a {@code Set<Tour>}.
+     */
+    public static Set<Tour> parseTours(Collection<String> allValues) {
+        Set<Tour> tourSet = new HashSet<>();
+        for (String tourName : allValues) {
+            tourSet.add(new Tour(tourName));
+        }
+        return tourSet;
+    }
+
 
     /**
      * Parses a {@code String halalStatus} into a {@code Halal Status}.
