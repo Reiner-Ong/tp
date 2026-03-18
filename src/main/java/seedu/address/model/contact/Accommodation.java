@@ -2,6 +2,7 @@ package seedu.address.model.contact;
 
 import static seedu.address.logic.parser.CliSyntax.TYPE_ACCOMMODATION;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
@@ -58,5 +59,10 @@ public class Accommodation extends Contact {
 
         return new Accommodation(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedStars,
                 updatedTours);
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of(stars.toString());
     }
 }

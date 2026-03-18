@@ -79,7 +79,7 @@ public class AccommodationStars {
 
     @Override
     public String toString() {
-        return switch (stars) {
+        return "Stars: " + switch (stars) {
         case ONE_STAR -> "1-Star";
         case TWO_STAR -> "2-Star";
         case THREE_STAR -> "3-Star";

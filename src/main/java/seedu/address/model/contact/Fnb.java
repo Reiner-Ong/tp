@@ -2,6 +2,7 @@ package seedu.address.model.contact;
 
 import static seedu.address.logic.parser.CliSyntax.TYPE_FNB;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
@@ -65,5 +66,10 @@ public class Fnb extends Contact {
         Set<Tour> updatedTours = editFnbDescriptor.getTours().orElse(getTours());
         return new Fnb(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedHalalStatus, updatedTours);
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of(isHalal.toString());
     }
 }

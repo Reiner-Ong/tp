@@ -3,6 +3,7 @@ package seedu.address.model.contact;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ATTRACTION;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
@@ -95,5 +96,13 @@ public class Attraction extends Contact {
 
         return new Attraction(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedOpeningHour, updatedClosingHour, updatedTours);
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of(
+                openingHour.toString(),
+                closingHour.toString()
+        );
     }
 }

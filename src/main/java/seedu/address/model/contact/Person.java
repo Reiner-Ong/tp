@@ -2,6 +2,7 @@ package seedu.address.model.contact;
 
 import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
 
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand.EditContactDescriptor;
@@ -36,5 +37,10 @@ public class Person extends Contact {
     @Override
     public String getType() {
         return TYPE_PERSON;
+    }
+
+    @Override
+    public List<String> getTypeSpecificDetails() {
+        return List.of();
     }
 }
