@@ -120,6 +120,8 @@ public abstract class Contact {
      */
     public abstract String getType();
 
+    public abstract List<String> getTypeSpecificDetails();
+
     /**
      * Returns a list of details specific to contact type.
      */

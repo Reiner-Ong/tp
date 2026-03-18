@@ -283,10 +283,16 @@ public class EditCommand extends Command {
          * @return an {@code Optional} containing the new set of tours, or {@code Optional.empty()} if unspecified
          */
         public Optional<Set<Tour>> getTours() {
+<<<<<<< fix/resolve-save-contact-and-tour-clashes
             return (tours != null) ? Optional.of(Collections.unmodifiableSet(tours)) : Optional.empty();
         }
 
 
+=======
+            return Optional.ofNullable(tours);
+        }
+
+>>>>>>> master
         @Override
         public boolean equals(Object other) {
             if (other == this) {

@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_ACCOMMODATION;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ATTRACTION;
 import static seedu.address.logic.parser.CliSyntax.TYPE_FNB;
 import static seedu.address.logic.parser.CliSyntax.TYPE_PERSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOUR;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -42,7 +43,6 @@ import seedu.address.model.tour.Tour;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.

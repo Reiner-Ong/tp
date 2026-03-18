@@ -45,7 +45,7 @@ public class OpeningHour {
 
     @Override
     public String toString() {
-        return openingHour.toString();
+        return "Opening: " + openingHour.toString();
     }
 
     @Override

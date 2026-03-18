@@ -101,8 +101,14 @@ public class Attraction extends Contact {
     @Override
     public List<String> getTypeSpecificDetails() {
         return List.of(
+<<<<<<< fix/resolve-save-contact-and-tour-clashes
                 "Operating Hours: " + openingHour.toString() + " to " + closingHour.toString(),
                 getToursString());
+=======
+                openingHour.toString(),
+                closingHour.toString()
+        );
+>>>>>>> master
     }
 }
 
