@@ -13,7 +13,7 @@ public class TourListCommand extends Command {
 
     public static final String COMMAND_WORD = "tour-list";
 
-    public static final String MESSAGE_SUCCESS = "Tour Packages Available:";
+    public static final String MESSAGE_SUCCESS = "Tour Packages Available";
 
     @Override
     public CommandResult execute(Model model) {
