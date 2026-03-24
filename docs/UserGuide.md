@@ -19,33 +19,31 @@ and execute better and smoother tours for your clients.
 ## How it serves you
 
 Bivago provides two main components:
+* Contact Management
+* Tour Management
 
-<panel header="Contact Management" type="seamless">
+### Contact Management
 Through Contact Management, you can **store different types of contacts** you work with. You can store contacts for
 people (e.g. drivers, shop owners), F&B establishments (e.g. street food vendors, restaurants), attractions (e.g.
 museums, amusement parks) and accommodation (e.g. hotels, hostels). For each type of contact, they come with additional
  information relevant to that type such as Halal status, operating hours, and stars. Tags are also available for you
  to store any additional information.
-</panel>
 
-<panel header="Tour Management" type="seamless">
+### Tour Management
 Through **Tour Management**, you can **store different tour packages** you offer and assign contacts with those tours.
 When planning to conduct a specific tour, you can see the assigned contacts at a glance and with the relevant
 information from the contacts, you can make informed decisions during tour planning. You can also benefit from tour
 management while conducting the tour as you can quickly view contact details on the day itself and contact them.
-</panel>
 
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.<br>
-<panel header="How to Install?" type="seamless">
 **Windows users:** Follow the installation instructions
 [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html).<br>
 **Mac users:** Follow the installation instructions
 [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
 **Mac users:** Follow the installation instructions
 [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).<br>
-</panel>
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W08-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for Bivago.
