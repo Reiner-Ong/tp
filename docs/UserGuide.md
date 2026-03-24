@@ -1,4 +1,4 @@
-x`---
+---
 layout: page
 title: User Guide
 ---
@@ -168,7 +168,7 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com`
 * `edit 2 n/New Name t/`
 
-### Locating contacts by name: `find`
+### Searching contacts by name: `find`
 
 Finds contacts whose names contain any of the given keywords.
 
@@ -212,7 +212,7 @@ Examples:
 
 ### Listing tours: `tour-list`
 
-Shows all available tour packages in the tour list.
+Shows all available tours in the tour list.
 
 Format: `tour-list`
 
@@ -227,7 +227,18 @@ Format: `tour-assign CONTACT_INDEX tour/TOUR_INDEX`
 Examples:
 * `tour-assign 1 tour/2`
 
-### Viewing contacts in a tour: `tour-view`
+### Unassigning a tour: `tour-unassign`
+
+Unassigns a tour from a contact.
+
+Format: `tour-unassign CONTACT_INDEX tour/TOUR_INDEX`
+
+* Both indices must be positive integers
+
+Examples:
+* `tour-unassign 3 tour/5`
+
+### Viewing a tour: `tour-view`
 
 Displays all contacts assigned to a specific tour.
 
@@ -235,6 +246,22 @@ Format: `tour-view INDEX`
 
 Examples:
 * `tour-view 1`
+
+### Searching tours by name: `tour-find`
+
+Finds tours whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* Case-insensitive (e.g. `foodie` matches `Foodie`)
+* Order does not matter
+* Only names are searched
+* Matches full words only
+* Returns contacts matching at least one keyword (OR search)
+
+Examples:
+* `tour-find Foodie`
+* `tour-find City Walking`
 
 ### Deleting a tour: `tour-delete`
 
@@ -270,24 +297,26 @@ the data of your previous Bivago home folder.
 
 ### Contact Management
 
-| Action       | Format, Examples |
-|--------------|-----------------|
+| Action       | Format, Examples                                                                                                                                                                                                             |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add** | `add type/TYPE n/NAME p/PHONE e/EMAIL a/ADDRESS [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]...` <br> e.g., `add type/person n/John Doe p/98765432 e/john@example.com a/311 Clementi Ave 2 t/friend` |
-| **Delete** | `delete INDEX` <br> e.g., `delete 3` |
-| **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]...` <br> e.g., `edit 2 p/91234567 e/john_new@example.com` |
-| **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John Jane` |
-| **List** | `list` |
+| **Delete** | `delete INDEX` <br> e.g., `delete 3`                                                                                                                                                                                         |
+| **Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HALAL_STATUS] [o/OPENING_HOUR] [c/CLOSING_HOUR] [s/STARS] [t/TAG]...` <br> e.g., `edit 2 p/91234567 e/john_new@example.com`                                          |
+| **Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find John Jane`                                                                                                                                                                   |
+| **List** | `list`                                                                                                                                                                                                                       |
 
 
 ### Tour Management
 
-| Action | Format, Examples |
-|--------|-----------------|
-| **Add** | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour` |
-| **Delete** | `tour-delete INDEX` <br> e.g., `tour-delete 2` |
-| **Assign** | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2` |
-| **View Contacts** | `tour-view INDEX` <br> e.g., `tour-view 1` |
-| **List** | `tour-list` |
+| Action       | Format, Examples                                                                  |
+|--------------|-----------------------------------------------------------------------------------|
+| **Add**      | `tour-add n/NAME` <br> e.g., `tour-add n/Le Royal Tour`                           |
+| **Delete**   | `tour-delete INDEX` <br> e.g., `tour-delete 2`                                    |
+| **Assign**   | `tour-assign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-assign 1 tour/2`     |
+| **Unassign** | `tour-unassign CONTACT_INDEX tour/TOUR_INDEX` <br> e.g., `tour-unassign 3 tour/5` |
+| **View**     | `tour-view INDEX` <br> e.g., `tour-view 1`                                        |
+| **Find** | `tour-find KEYWORD [MORE_KEYWORDS]` <br> e.g., `tour-find City Walking`           |
+| **List**     | `tour-list`                                                                       |
 
 
 ### Miscellaneous
