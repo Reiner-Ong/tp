@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.tour.Tour;
 import seedu.address.model.tour.TourNameContainsKeywordsPredicate;
 
 /**
@@ -19,18 +22,32 @@ public class TourFindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " Walking";
 
+    private StringBuilder matchingList;
+
     private final TourNameContainsKeywordsPredicate predicate;
 
     public TourFindCommand(TourNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
+        this.matchingList = new StringBuilder();
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTourList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_TOURS_LISTED_OVERVIEW, model.getFilteredTourList().size()));
+
+        List<Tour> filteredTours = model.getFilteredTourList();
+
+        if (filteredTours.isEmpty()) {
+            return new CommandResult("No matching tours found.");
+        }
+
+        StringBuilder sb = new StringBuilder("Matching Tours:\n");
+        for (int i = 0; i < filteredTours.size(); i++) {
+            sb.append(i + 1).append(". ").append(filteredTours.get(i).getTourName()).append("\n");
+        }
+
+        return new CommandResult(sb.toString());
     }
 
     @Override
