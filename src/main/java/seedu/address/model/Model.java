@@ -55,6 +55,21 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Saves the address book to history.
+     */
+    void commitAddressBook();
+
+    /**
+     * Restores the previous address book from history.
+     */
+    void undoAddressBook();
+
+    /**
+     * Restores a previously undone address book from history.
+     */
+    void redoAddressBook();
+
+    /**
      * Returns true if a contact with the same identity as {@code contact} exists in the address book.
      */
     boolean hasContact(Contact contact);
