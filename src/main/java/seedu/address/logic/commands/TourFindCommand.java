@@ -5,32 +5,32 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.contact.NameContainsKeywordsPredicate;
+import seedu.address.model.tour.TourNameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all contacts in address book whose name contains any of the argument keywords.
+ * Finds and lists all tours in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
-    public static final String COMMAND_WORD = "find";
+public class TourFindCommand extends Command {
+    public static final String COMMAND_WORD = "tour-find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all contacts whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tours whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " Walking";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final TourNameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public TourFindCommand(TourNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredContactList(predicate);
+        model.updateFilteredTourList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW, model.getFilteredContactList().size()));
+                String.format(Messages.MESSAGE_TOURS_LISTED_OVERVIEW, model.getFilteredTourList().size()));
     }
 
     @Override
@@ -40,11 +40,11 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof TourFindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
+        TourFindCommand otherFindCommand = (TourFindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 

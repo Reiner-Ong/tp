@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.NameContainsKeywordsPredicate;
 import seedu.address.model.tour.Tour;
 
 /**
@@ -105,7 +106,7 @@ public interface Model {
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
 
-    /** Returns an unmodifiable biew of the filtered tour list */
+    /** Returns an unmodifiable view of the filtered tour list */
     ObservableList<Tour> getFilteredTourList();
 
     /**
