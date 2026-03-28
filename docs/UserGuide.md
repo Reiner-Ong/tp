@@ -35,7 +35,8 @@ management while conducting the tour as you can quickly view contact details on 
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer.]
+
 <details>
 <summary>How to install?</summary>
 
@@ -46,7 +47,7 @@ management while conducting the tour as you can quickly view contact details on 
 <b>Mac users:</b> Follow the installation instructions
 <a href="https://se-education.org/guides/tutorials/javaInstallationMac.html">here</a>.<br>
 
-</details><br>
+</details>
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S2-CS2103T-W08-1/tp/releases).
 
