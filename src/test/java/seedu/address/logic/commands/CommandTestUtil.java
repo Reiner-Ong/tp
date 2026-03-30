@@ -45,6 +45,9 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_FAVORITE_STATUS_TRUE = "true";
+    public static final String VALID_FAVORITE_STATUS_FALSE = "false";
+    public static final String INVALID_FAVORITE_STATUS = "maybe";
 
     public static final String VALID_TYPE_FNB = "fnb";
     public static final String VALID_TYPE_ATTRACTION = "attraction";
@@ -70,9 +73,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FUN = "fun";
     public static final String VALID_TAG_STAY = "stay";
 
-    public static final String VALID_HALAL_STATUS_FNB = "true";
+    public static final String VALID_HALAL_STATUS_TRUE_FNB = "true";
+    public static final String VALID_HALAL_STATUS_FALSE_FNB = "false";
+    public static final String VALID_OPENING_HOUR_DEFAULT_ATTRACTION = "08:00";
+    public static final String VALID_CLOSING_HOUR_DEFAULT_ATTRACTION = "22:00";
     public static final String VALID_OPENING_HOUR_ATTRACTION = "09:00";
-    public static final String VALID_CLOSING_HOUR_ATTRACTION = "22:00";
+    public static final String VALID_CLOSING_HOUR_ATTRACTION = "23:00";
+    public static final String VALID_STARS_DEFAULT_ACCOMMODATION = "3";
     public static final String VALID_STARS_ACCOMMODATION = "4";
 
     public static final String VALID_TOUR_NAME_JAMES = "Le Tour James";
@@ -115,7 +122,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FUN = " " + PREFIX_TAG + VALID_TAG_FUN;
     public static final String TAG_DESC_STAY = " " + PREFIX_TAG + VALID_TAG_STAY;
 
-    public static final String HALAL_STATUS_DESC_FNB = " " + PREFIX_HALAL_STATUS + VALID_HALAL_STATUS_FNB;
+    public static final String HALAL_STATUS_DESC_FNB = " " + PREFIX_HALAL_STATUS + VALID_HALAL_STATUS_TRUE_FNB;
     public static final String OPENING_HOUR_DESC_ATTRACTION = " " + PREFIX_OPENING_HOUR + VALID_OPENING_HOUR_ATTRACTION;
     public static final String CLOSING_HOUR_DESC_ATTRACTION = " " + PREFIX_CLOSING_HOUR + VALID_CLOSING_HOUR_ATTRACTION;
     public static final String STARS_DESC_ACCOMMODATION = " " + PREFIX_STARS + VALID_STARS_ACCOMMODATION;
@@ -127,10 +134,10 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String INVALID_HALAL_STATUS_DESC = " " + PREFIX_HALAL_STATUS + "Maybe";
-    public static final String INVALID_OPENING_HOUR_DESC = " " + PREFIX_OPENING_HOUR + "9am";
-    public static final String INVALID_CLOSING_HOUR_DESC = " " + PREFIX_CLOSING_HOUR + "25:00";
-    public static final String INVALID_STARS_DESC = " " + PREFIX_STARS + "6";
+    public static final String INVALID_HALAL_STATUS_DESC = " " + PREFIX_HALAL_STATUS + "Maybe"; // not true/false
+    public static final String INVALID_OPENING_HOUR_DESC = " " + PREFIX_OPENING_HOUR + "9am"; // not in HH:mm format
+    public static final String INVALID_CLOSING_HOUR_DESC = " " + PREFIX_CLOSING_HOUR + "25:00"; // invalid HH:mm value
+    public static final String INVALID_STARS_DESC = " " + PREFIX_STARS + "6"; // invalid value
 
     public static final String TOUR_NAME_DESC_JAMES = " " + PREFIX_NAME + VALID_TOUR_NAME_JAMES;
     public static final String TOUR_NAME_DESC_JAMES_JR = " " + PREFIX_NAME + VALID_TOUR_NAME_JAMES_JR;
@@ -156,18 +163,21 @@ public class CommandTestUtil {
 
         DESC_FNB = new EditContactDescriptorBuilder().withName(VALID_NAME_FNB)
                 .withPhone(VALID_PHONE_FNB).withEmail(VALID_EMAIL_FNB).withAddress(VALID_ADDRESS_FNB)
-                .withTags(VALID_TAG_INDIAN).withHalalStatus(VALID_HALAL_STATUS_FNB).build();
+                .withTags(VALID_TAG_INDIAN).withHalalStatus(VALID_HALAL_STATUS_TRUE_FNB)
+                .withFavoriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
 
         DESC_ATTRACTION = new EditContactDescriptorBuilder().withName(VALID_NAME_ATTRACTION)
                 .withPhone(VALID_PHONE_ATTRACTION).withEmail(VALID_EMAIL_ATTRACTION)
                 .withAddress(VALID_ADDRESS_ATTRACTION).withTags(VALID_TAG_FUN)
                 .withOpeningHour(VALID_OPENING_HOUR_ATTRACTION)
-                .withClosingHour(VALID_CLOSING_HOUR_ATTRACTION).build();
+                .withClosingHour(VALID_CLOSING_HOUR_ATTRACTION)
+                .withFavoriteStatus(VALID_FAVORITE_STATUS_FALSE).build();
 
         DESC_ACCOMMODATION = new EditContactDescriptorBuilder().withName(VALID_NAME_ACCOMMODATION)
                 .withPhone(VALID_PHONE_ACCOMMODATION).withEmail(VALID_EMAIL_ACCOMMODATION)
                 .withAddress(VALID_ADDRESS_ACCOMMODATION).withTags(VALID_TAG_STAY)
-                .withStars(VALID_STARS_ACCOMMODATION).build();
+                .withStars(VALID_STARS_ACCOMMODATION)
+                .withFavoriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
     }
 
     /**

@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FAVORITE_STATUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FAVORITE_STATUS_FALSE;
 import static seedu.address.storage.JsonAdaptedContact.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedContact.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,6 +25,7 @@ import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
 import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
@@ -62,6 +65,22 @@ public class JsonAdaptedContactTest {
     @Test
     public void toModelType_validPersonDetails_returnsContact() throws Exception {
         JsonAdaptedContact contact = new JsonAdaptedContact(BENSON);
+        assertEquals(BENSON, contact.toModelType());
+    }
+
+    @Test
+    public void toModelType_validFavoriteStatus_returnsContact() throws Exception {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, VALID_FAVORITE_STATUS_FALSE);
+        assertEquals(BENSON, contact.toModelType());
+    }
+
+    @Test
+    public void toModelType_nullFavoriteStatus_returnsContact() throws Exception {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON, VALID_ADDRESS_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, null);
         assertEquals(BENSON, contact.toModelType());
     }
 
@@ -161,6 +180,16 @@ public class JsonAdaptedContactTest {
                         VALID_ADDRESS_PERSON, invalidTags, EMPTY_TOUR,
                         NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER);
         assertThrows(IllegalValueException.class, contact::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidFavoriteStatus_throwsIllegalValueException() {
+        JsonAdaptedContact contact = new JsonAdaptedContact(VALID_TYPE_PERSON, VALID_NAME_PERSON, VALID_PHONE_PERSON,
+                VALID_EMAIL_PERSON,
+                VALID_EMAIL_PERSON, VALID_TAGS_PERSON, EMPTY_TOUR,
+                NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, NULL_PARAMETER, INVALID_FAVORITE_STATUS);
+        String expectedMessage = FavoriteStatus.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, contact::toModelType);
     }
 
     @Test

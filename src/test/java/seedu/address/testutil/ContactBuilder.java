@@ -3,9 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.contact.Accommodation;
 import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
@@ -22,6 +26,7 @@ public abstract class ContactBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_FAVORITE_STATUS = "false";
 
     protected Name name;
     protected Phone phone;
@@ -29,6 +34,7 @@ public abstract class ContactBuilder {
     protected Address address;
     protected Set<Tag> tags;
     protected Set<Tour> tours;
+    protected FavoriteStatus favoriteStatus;
 
     /**
      * Creates a {@code ContactBuilder} with the default details.
@@ -38,6 +44,7 @@ public abstract class ContactBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        favoriteStatus = new FavoriteStatus(DEFAULT_FAVORITE_STATUS);
         tags = new HashSet<>();
         tours = new HashSet<>();
     }
@@ -54,7 +61,48 @@ public abstract class ContactBuilder {
             personBuilder.address = person.getAddress();
             personBuilder.tags = new HashSet<>(person.getTags());
             personBuilder.tours = new HashSet<>(person.getTours());
+            personBuilder.favoriteStatus = person.getFavoriteStatus();
             return personBuilder;
+        }
+
+        if (contactToCopy instanceof Fnb fnb) {
+            FnbBuilder builder = new FnbBuilder();
+            builder.name = fnb.getName();
+            builder.phone = fnb.getPhone();
+            builder.email = fnb.getEmail();
+            builder.address = fnb.getAddress();
+            builder.tags = new HashSet<>(fnb.getTags());
+            builder.tours = new HashSet<>(fnb.getTours());
+            builder.favoriteStatus = fnb.getFavoriteStatus();
+            builder.halalStatus = fnb.getHalalStatus();
+            return builder;
+        }
+
+        if (contactToCopy instanceof Attraction attraction) {
+            AttractionBuilder builder = new AttractionBuilder();
+            builder.name = attraction.getName();
+            builder.phone = attraction.getPhone();
+            builder.email = attraction.getEmail();
+            builder.address = attraction.getAddress();
+            builder.tags = new HashSet<>(attraction.getTags());
+            builder.tours = new HashSet<>(attraction.getTours());
+            builder.favoriteStatus = attraction.getFavoriteStatus();
+            builder.openingHour = attraction.getOpeningHour();
+            builder.closingHour = attraction.getClosingHour();
+            return builder;
+        }
+
+        if (contactToCopy instanceof Accommodation accommodation) {
+            AccommodationBuilder builder = new AccommodationBuilder();
+            builder.name = accommodation.getName();
+            builder.phone = accommodation.getPhone();
+            builder.email = accommodation.getEmail();
+            builder.address = accommodation.getAddress();
+            builder.tags = new HashSet<>(accommodation.getTags());
+            builder.tours = new HashSet<>(accommodation.getTours());
+            builder.favoriteStatus = accommodation.getFavoriteStatus();
+            builder.stars = accommodation.getStars();
+            return builder;
         }
         return null;
     }
@@ -72,6 +120,14 @@ public abstract class ContactBuilder {
      */
     public ContactBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code FavoriteStatus} of the {@code Contact} that we are building.
+     */
+    public ContactBuilder withFavoriteStatus(String favoriteStatus) {
+        this.favoriteStatus = new FavoriteStatus(favoriteStatus);
         return this;
     }
 

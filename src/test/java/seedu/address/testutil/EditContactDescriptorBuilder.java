@@ -10,11 +10,13 @@ import seedu.address.model.contact.Address;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.FavoriteStatus;
 import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.OpeningHour;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tour.Tour;
 
 /**
  * A utility class to help with building EditContactDescriptor objects.
@@ -84,6 +86,27 @@ public class EditContactDescriptorBuilder {
         descriptor.setTags(tagSet);
         return this;
     }
+
+    /**
+     * Parses the {@code tours} into a {@code Set<Tour>} and set it to the {@code EditContactDescriptor}
+     * that we are building.
+     */
+    public EditContactDescriptorBuilder withTours(String... tours) {
+        Set<Tour> tourSet = Stream.of(tours)
+                .map(Tour::new)
+                .collect(Collectors.toSet());
+        descriptor.setTours(tourSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Favorite Status} of the {@code EditContactDescriptor} that we are building.
+     */
+    public EditContactDescriptorBuilder withFavoriteStatus(String favoriteStatus) {
+        descriptor.setFavorite(new FavoriteStatus(favoriteStatus));
+        return this;
+    }
+
 
     /**
      * Sets the {@code Halal Status} of the {@code EditContactDescriptor} that we are building.

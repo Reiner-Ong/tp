@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_FNB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_TRUE_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ATTRACTION;
@@ -81,7 +81,7 @@ public class TypicalContacts {
             .build();
     // Fnb
     public static final Fnb AL_AZHAR = (Fnb) new FnbBuilder()
-            .withHalalStatus(VALID_HALAL_STATUS_FNB)
+            .withHalalStatus(VALID_HALAL_STATUS_TRUE_FNB)
             .withName(VALID_NAME_FNB)
             .withPhone(VALID_PHONE_FNB)
             .withEmail(VALID_EMAIL_FNB)
@@ -92,7 +92,8 @@ public class TypicalContacts {
 
     // Attraction
     public static final Attraction USS = (Attraction) new AttractionBuilder()
-            .withOperatingHours(VALID_OPENING_HOUR_ATTRACTION, VALID_CLOSING_HOUR_ATTRACTION)
+            .withOpeningHour(VALID_OPENING_HOUR_ATTRACTION)
+            .withClosingHour(VALID_CLOSING_HOUR_ATTRACTION)
             .withName(VALID_NAME_ATTRACTION)
             .withPhone(VALID_PHONE_ATTRACTION)
             .withEmail(VALID_EMAIL_ATTRACTION)

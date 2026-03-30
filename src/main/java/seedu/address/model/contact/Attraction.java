@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.TYPE_ATTRACTION;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.logic.commands.contact.EditCommand;
@@ -91,6 +92,28 @@ public class Attraction extends Contact {
     @Override
     public String getType() {
         return TYPE_ATTRACTION;
+    }
+
+    /**
+     * Returns true if both contacts have the same identity and data fields.
+     * This defines a stronger notion of equality between two contacts.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Attraction otherAttraction)) {
+            return false;
+        }
+        return super.equals(otherAttraction)
+                && openingHour.equals(otherAttraction.openingHour)
+                && closingHour.equals(otherAttraction.closingHour);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), openingHour, closingHour);
     }
 
     /**
