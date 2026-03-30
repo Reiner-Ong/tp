@@ -3,10 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.contact.Accommodation;
 import seedu.address.model.contact.Address;
+import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
 import seedu.address.model.contact.FavoriteStatus;
+import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Person;
 import seedu.address.model.contact.Phone;
@@ -60,6 +63,46 @@ public abstract class ContactBuilder {
             personBuilder.tours = new HashSet<>(person.getTours());
             personBuilder.favoriteStatus = person.getFavoriteStatus();
             return personBuilder;
+        }
+
+        if (contactToCopy instanceof Fnb fnb) {
+            FnbBuilder builder = new FnbBuilder();
+            builder.name = fnb.getName();
+            builder.phone = fnb.getPhone();
+            builder.email = fnb.getEmail();
+            builder.address = fnb.getAddress();
+            builder.tags = new HashSet<>(fnb.getTags());
+            builder.tours = new HashSet<>(fnb.getTours());
+            builder.favoriteStatus = fnb.getFavoriteStatus();
+            builder.halalStatus = fnb.getHalalStatus();
+            return builder;
+        }
+
+        if (contactToCopy instanceof Attraction attraction) {
+            AttractionBuilder builder = new AttractionBuilder();
+            builder.name = attraction.getName();
+            builder.phone = attraction.getPhone();
+            builder.email = attraction.getEmail();
+            builder.address = attraction.getAddress();
+            builder.tags = new HashSet<>(attraction.getTags());
+            builder.tours = new HashSet<>(attraction.getTours());
+            builder.favoriteStatus = attraction.getFavoriteStatus();
+            builder.openingHour = attraction.getOpeningHour();
+            builder.closingHour = attraction.getClosingHour();
+            return builder;
+        }
+
+        if (contactToCopy instanceof Accommodation accommodation) {
+            AccommodationBuilder builder = new AccommodationBuilder();
+            builder.name = accommodation.getName();
+            builder.phone = accommodation.getPhone();
+            builder.email = accommodation.getEmail();
+            builder.address = accommodation.getAddress();
+            builder.tags = new HashSet<>(accommodation.getTags());
+            builder.tours = new HashSet<>(accommodation.getTours());
+            builder.favoriteStatus = accommodation.getFavoriteStatus();
+            builder.stars = accommodation.getStars();
+            return builder;
         }
         return null;
     }

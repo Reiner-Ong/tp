@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import seedu.address.model.contact.Attraction;
 import seedu.address.model.contact.ClosingHour;
 import seedu.address.model.contact.Contact;
+import seedu.address.model.contact.HalalStatus;
 import seedu.address.model.contact.OpeningHour;
+
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLOSING_HOUR_DEFAULT_ATTRACTION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HALAL_STATUS_FALSE_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_OPENING_HOUR_DEFAULT_ATTRACTION;
 
 /**
  * A utility class to help with building Person objects.
@@ -13,14 +18,29 @@ public class AttractionBuilder extends ContactBuilder {
     protected ClosingHour closingHour;
 
     /**
-     * Sets the {@code OpeningHour} and {@code ClosingHour} of the {@code Attraction} that we are building.
+     * Creates a {@code ContactBuilder} with the default details.
      */
-    public ContactBuilder withOperatingHours(String openingHour, String closingHour) {
+    public AttractionBuilder() {
+        super();
+        this.openingHour = new OpeningHour(VALID_OPENING_HOUR_DEFAULT_ATTRACTION);
+        this.closingHour = new ClosingHour(VALID_CLOSING_HOUR_DEFAULT_ATTRACTION);
+    }
+
+    /**
+     * Sets the {@code OpeningHour} of the {@code Attraction} that we are building.
+     */
+    public AttractionBuilder withOpeningHour(String openingHour) {
         this.openingHour = new OpeningHour(openingHour);
-        this.closingHour = new ClosingHour(closingHour);
         return this;
     }
 
+    /**
+     * Sets the {@code ClosingHour} of the {@code Attraction} that we are building.
+     */
+    public AttractionBuilder withClosingHour(String closingHour) {
+        this.closingHour = new ClosingHour(closingHour);
+        return this;
+    }
     @Override
     public Contact build() {
         return new Attraction(name, phone, email, address, tags, openingHour, closingHour, tours, favoriteStatus);

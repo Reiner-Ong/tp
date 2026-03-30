@@ -65,7 +65,7 @@
     "address" : "1 Sentosa Drive",
     "tags" : [ "fun" ],
     "openingHour" : "09:00",
-    "closingHour" : "22:00",
+    "closingHour" : "23:00",
     "favoriteStatus" : "false"
   }, {
     "type" : "Accommodation",

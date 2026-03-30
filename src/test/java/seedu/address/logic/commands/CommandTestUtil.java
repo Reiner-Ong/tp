@@ -73,9 +73,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FUN = "fun";
     public static final String VALID_TAG_STAY = "stay";
 
-    public static final String VALID_HALAL_STATUS_FNB = "true";
+    public static final String VALID_HALAL_STATUS_TRUE_FNB = "true";
+    public static final String VALID_HALAL_STATUS_FALSE_FNB = "false";
+    public static final String VALID_OPENING_HOUR_DEFAULT_ATTRACTION = "08:00";
+    public static final String VALID_CLOSING_HOUR_DEFAULT_ATTRACTION = "22:00";
     public static final String VALID_OPENING_HOUR_ATTRACTION = "09:00";
-    public static final String VALID_CLOSING_HOUR_ATTRACTION = "22:00";
+    public static final String VALID_CLOSING_HOUR_ATTRACTION = "23:00";
+    public static final String VALID_STARS_DEFAULT_ACCOMMODATION = "3";
     public static final String VALID_STARS_ACCOMMODATION = "4";
 
     public static final String VALID_TOUR_NAME_JAMES = "Le Tour James";
@@ -118,7 +122,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FUN = " " + PREFIX_TAG + VALID_TAG_FUN;
     public static final String TAG_DESC_STAY = " " + PREFIX_TAG + VALID_TAG_STAY;
 
-    public static final String HALAL_STATUS_DESC_FNB = " " + PREFIX_HALAL_STATUS + VALID_HALAL_STATUS_FNB;
+    public static final String HALAL_STATUS_DESC_FNB = " " + PREFIX_HALAL_STATUS + VALID_HALAL_STATUS_TRUE_FNB;
     public static final String OPENING_HOUR_DESC_ATTRACTION = " " + PREFIX_OPENING_HOUR + VALID_OPENING_HOUR_ATTRACTION;
     public static final String CLOSING_HOUR_DESC_ATTRACTION = " " + PREFIX_CLOSING_HOUR + VALID_CLOSING_HOUR_ATTRACTION;
     public static final String STARS_DESC_ACCOMMODATION = " " + PREFIX_STARS + VALID_STARS_ACCOMMODATION;
@@ -159,7 +163,7 @@ public class CommandTestUtil {
 
         DESC_FNB = new EditContactDescriptorBuilder().withName(VALID_NAME_FNB)
                 .withPhone(VALID_PHONE_FNB).withEmail(VALID_EMAIL_FNB).withAddress(VALID_ADDRESS_FNB)
-                .withTags(VALID_TAG_INDIAN).withHalalStatus(VALID_HALAL_STATUS_FNB)
+                .withTags(VALID_TAG_INDIAN).withHalalStatus(VALID_HALAL_STATUS_TRUE_FNB)
                 .withFavoriteStatus(VALID_FAVORITE_STATUS_TRUE).build();
 
         DESC_ATTRACTION = new EditContactDescriptorBuilder().withName(VALID_NAME_ATTRACTION)

@@ -3,6 +3,7 @@ package seedu.address.model.contact;
 import static seedu.address.logic.parser.CliSyntax.TYPE_ACCOMMODATION;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.logic.commands.contact.EditCommand;
@@ -54,6 +55,27 @@ public class Accommodation extends Contact {
     @Override
     public String getType() {
         return TYPE_ACCOMMODATION;
+    }
+
+    /**
+     * Returns true if both contacts have the same identity and data fields.
+     * This defines a stronger notion of equality between two contacts.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Accommodation otherAccommodation)) {
+            return false;
+        }
+        return super.equals(otherAccommodation)
+                && stars.equals(otherAccommodation.stars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), stars);
     }
 
     /**
