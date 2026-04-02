@@ -216,7 +216,7 @@ A contact can have any number of tags (including 0)
 <ul>
   <li>Emails should be in the form <code>LOCAL-PART@DOMAIN</code>.</li>
 
-  <li><code>LOCAL-PART</code> must contain only alphanumeric characters, and the following special characters: <code>+_.-</code>.
+  <li><code>LOCAL-PART</code> must contain only alphanumeric characters, and the following special characters: <code>+_.-</code>.</li>
   <ul>
     <li><code>LOCAL-PART</code> must not start or end with any special characters.</li>
   </ul>
