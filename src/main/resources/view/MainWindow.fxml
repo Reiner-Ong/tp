@@ -31,22 +31,24 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="result-area"
-                   minHeight="72" prefHeight="72" maxHeight="72">
-          <padding>
-            <Insets top="8" right="16" bottom="8" left="16" />
-          </padding>
-        </StackPane>
+        <SplitPane fx:id="resultSplitPane" VBox.vgrow="ALWAYS" orientation="VERTICAL" dividerPositions="0.15">
+          <StackPane fx:id="resultDisplayPlaceholder" styleClass="result-area" minHeight="36">
+            <padding>
+              <Insets top="8" right="16" bottom="8" left="16" />
+            </padding>
+          </StackPane>
 
-        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.65">
-          <VBox fx:id="contactList" styleClass="pane-with-border" minWidth="320">
-            <StackPane fx:id="contactListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+          <SplitPane dividerPositions="0.65">
+            <VBox fx:id="contactList" styleClass="pane-with-border" minWidth="320">
+              <StackPane fx:id="contactListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
 
-          <VBox fx:id="tourList" styleClass="pane-with-border" minWidth="280">
-            <StackPane fx:id="tourListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
+            <VBox fx:id="tourList" styleClass="pane-with-border" minWidth="280">
+              <StackPane fx:id="tourListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+          </SplitPane>
         </SplitPane>
+
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" managed="false" visible="false" />
       </VBox>
     </Scene>
