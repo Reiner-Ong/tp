@@ -87,22 +87,45 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        Contact contactToEdit = getContactToEdit(model);
+        Contact editedContact = getEditedContact(contactToEdit, model);
+
+        model.setContact(contactToEdit, editedContact);
+        assert contactToEdit != editedContact : "Original contact must have been edited";
+
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
+    }
+
+    /**
+     * Returns the contact to edit.
+     */
+    private Contact getContactToEdit(Model model) throws CommandException {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        Contact contactToEdit = lastShownList.get(index.getZeroBased());
+        return lastShownList.get(index.getZeroBased());
+    }
+
+    /**
+     * Returns the edited contact.
+     */
+    private Contact getEditedContact(Contact contactToEdit, Model model) throws CommandException {
+        requireNonNull(contactToEdit);
+        requireNonNull(model);
+        requireNonNull(editContactDescriptor);
+
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
+        return editedContact;
     }
 
     /**
@@ -110,9 +133,14 @@ public class EditCommand extends Command {
      * edited with {@code editContactDescriptor}.
      */
     private static Contact createEditedContact(Contact contactToEdit, EditContactDescriptor editContactDescriptor) {
-        assert contactToEdit != null;
+        requireNonNull(contactToEdit);
+        requireNonNull(editContactDescriptor);
 
-        return contactToEdit.edit(editContactDescriptor);
+        Contact editedContact = contactToEdit.edit(editContactDescriptor);
+
+        assert editedContact != null : "Edited contact should not be null";
+        assert contactToEdit != editedContact : "Edited contact should not the same as the original contact";
+        return editedContact;
     }
 
     @Override

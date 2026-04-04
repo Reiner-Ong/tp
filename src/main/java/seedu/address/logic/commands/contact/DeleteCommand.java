@@ -29,22 +29,35 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Returns a DeleteCommand with target index.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Contact contactToDelete = getContactToDelete(model);
+        model.deleteContact(contactToDelete);
+
+        assert !model.hasContact(contactToDelete) : "Contact should have been deleted";
+        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
+    }
+
+    /**
+     * Returns the contact to delete.
+     */
+    private Contact getContactToDelete(Model model) throws CommandException {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
-        Contact contactToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteContact(contactToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
+        return lastShownList.get(targetIndex.getZeroBased());
     }
 
     @Override

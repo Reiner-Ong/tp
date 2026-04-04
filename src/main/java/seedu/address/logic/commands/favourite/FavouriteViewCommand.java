@@ -16,10 +16,7 @@ public class FavouriteViewCommand extends Command {
 
     public static final String COMMAND_WORD = "favourite-view";
 
-    private final ContactIsFavouritePredicate predicate = new ContactIsFavouritePredicate();
-
-    public FavouriteViewCommand() {
-    }
+    private static final ContactIsFavouritePredicate predicate = new ContactIsFavouritePredicate();
 
     @Override
     public CommandResult execute(Model model) {

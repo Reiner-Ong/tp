@@ -70,6 +70,8 @@ public class AddCommand extends Command {
         }
 
         model.addContact(toAdd);
+
+        assert model.hasContact(toAdd) : "Contact should have been added";
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

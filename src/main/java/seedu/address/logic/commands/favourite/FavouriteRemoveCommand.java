@@ -32,6 +32,8 @@ public class FavouriteRemoveCommand extends Command {
     public static final String MESSAGE_REMOVE_FAVOURITE_SUCCESS = "Removed contact from favourites: %1$s";
     public static final String MESSAGE_DUPLICATE_NON_FAVOURITE = "Contact is already not in favourites.";
 
+    private static final FavouriteStatus FAVOURITE_FALSE = new FavouriteStatus("false");
+
     private final Index contactIndex;
 
     /**
@@ -45,6 +47,17 @@ public class FavouriteRemoveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Contact contactToEdit = getContactToEdit(model);
+        Contact editedContact = getEditedContact(contactToEdit);
+        model.setContact(contactToEdit, editedContact);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        return new CommandResult(String.format(MESSAGE_REMOVE_FAVOURITE_SUCCESS, Messages.format(editedContact)));
+    }
+
+    /**
+     * Returns the contact to remove from favourites.
+     */
+    private Contact getContactToEdit(Model model) throws CommandException {
         List<Contact> lastShownContactList = model.getFilteredContactList();
 
         if (contactIndex.getZeroBased() >= lastShownContactList.size()) {
@@ -52,21 +65,29 @@ public class FavouriteRemoveCommand extends Command {
         }
 
         Contact contactToEdit = lastShownContactList.get(contactIndex.getZeroBased());
+        assert contactToEdit != null : "Contact from contact list must not be null.";
 
         if (!contactToEdit.isFavourite()) {
             throw new CommandException(MESSAGE_DUPLICATE_NON_FAVOURITE);
         }
 
-        FavouriteStatus updatedFavouriteStatus = new FavouriteStatus("false");
+        return contactToEdit;
+    }
 
+    /**
+     * Returns the contact with updated favourite status.
+     */
+    private Contact getEditedContact(Contact contactToEdit) {
+        requireNonNull(contactToEdit);
         EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
-        descriptor.setFavourite(updatedFavouriteStatus);
+        descriptor.setFavourite(FAVOURITE_FALSE);
 
         Contact editedContact = contactToEdit.edit(descriptor);
 
-        model.setContact(contactToEdit, editedContact);
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_FAVOURITE_SUCCESS, Messages.format(editedContact)));
+        assert editedContact != null : "Edited contact must not be null.";
+        assert !editedContact.isFavourite() : "Contact must have been removed from favourites.";
+
+        return editedContact;
     }
 
     @Override
