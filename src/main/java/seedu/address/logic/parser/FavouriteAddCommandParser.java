@@ -7,7 +7,7 @@ import seedu.address.logic.commands.favourite.FavouriteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new TourDeleteCommand object
+ * Parses input arguments and creates a new FavoriteAddCommand object
  */
 public class FavouriteAddCommandParser implements Parser<FavouriteAddCommand> {
 
