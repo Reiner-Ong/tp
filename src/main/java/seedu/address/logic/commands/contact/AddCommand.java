@@ -33,12 +33,12 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS \n"
-            + "[" + PREFIX_HALAL_STATUS + "HALAL STATUS (for FnB contacts)]... "
-            + "[" + PREFIX_OPENING_HOUR + "OPENING HOUR (for Attraction contacts)] \n"
-            + "[" + PREFIX_CLOSING_HOUR + "CLOSING HOUR (for Attraction contacts)] "
-            + "[" + PREFIX_STARS + "STARS (for for Accommodations)] "
-            + "[" + PREFIX_TAG + "TAG]... \n"
+            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "FnB only: [" + PREFIX_HALAL_STATUS + "HALAL STATUS]\n"
+            + "Attraction only: [" + PREFIX_OPENING_HOUR + "OPENING HOUR] "
+            + "[" + PREFIX_CLOSING_HOUR + "CLOSING HOUR]\n"
+            + "Accommodation only: [" + PREFIX_STARS + "STARS]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TYPE + "person "
             + PREFIX_NAME + "John Doe "
@@ -70,6 +70,7 @@ public class AddCommand extends Command {
         }
 
         model.addContact(toAdd);
+        model.commitAddressBook();
 
         assert model.hasContact(toAdd) : "Contact should have been added";
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

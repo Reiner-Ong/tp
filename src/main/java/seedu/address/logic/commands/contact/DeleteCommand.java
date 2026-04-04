@@ -42,6 +42,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Contact contactToDelete = getContactToDelete(model);
         model.deleteContact(contactToDelete);
+        model.commitAddressBook();
 
         assert !model.hasContact(contactToDelete) : "Contact should have been deleted";
         return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));

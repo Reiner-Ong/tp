@@ -92,6 +92,7 @@ public class EditCommand extends Command {
         Contact editedContact = getEditedContact(contactToEdit, model);
 
         model.setContact(contactToEdit, editedContact);
+        model.commitAddressBook();
         assert contactToEdit != editedContact : "Original contact must have been edited";
 
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
