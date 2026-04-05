@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -69,6 +71,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
 
+    private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
+
     private final Index index;
     private final EditContactDescriptor editContactDescriptor;
 
@@ -93,6 +97,7 @@ public class EditCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         assert contactToEdit != editedContact : "Original contact must have been edited";
+        logger.fine(String.format("Edited contact from %s to %s", contactToEdit, editedContact));
 
         model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
@@ -105,6 +110,7 @@ public class EditCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
+            logger.info("Invalid index for EditCommand");
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 
@@ -122,6 +128,7 @@ public class EditCommand extends Command {
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
+            logger.info("Contact is already the same");
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 

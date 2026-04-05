@@ -11,6 +11,9 @@ public class FavouriteStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "Favourite Status should only be 'true' or 'false (default if unspecified)'.";
 
+    public static final String VALID_FAVOURITE_STATUS_TRUE = "true";
+    public static final String VALID_FAVOURITE_STATUS_FALSE = "false";
+
     /*
      * The string must be 'true' or 'false' (case-insensitive).
      */

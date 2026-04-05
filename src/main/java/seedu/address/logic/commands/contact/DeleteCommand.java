@@ -3,7 +3,9 @@ package seedu.address.logic.commands.contact;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -27,6 +29,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_CONTACT_SUCCESS = "Deleted Contact: %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class);
+
     private final Index targetIndex;
 
     /**
@@ -44,6 +48,7 @@ public class DeleteCommand extends Command {
         model.deleteContact(contactToDelete);
 
         assert !model.hasContact(contactToDelete) : "Contact should have been deleted";
+        logger.fine(String.format("Deleted contact: %s", contactToDelete));
         return new CommandResult(String.format(MESSAGE_DELETE_CONTACT_SUCCESS, Messages.format(contactToDelete)));
     }
 
@@ -54,6 +59,7 @@ public class DeleteCommand extends Command {
         List<Contact> lastShownList = model.getFilteredContactList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            logger.info("Invalid index for DeleteCommand");
             throw new CommandException(Messages.MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX);
         }
 

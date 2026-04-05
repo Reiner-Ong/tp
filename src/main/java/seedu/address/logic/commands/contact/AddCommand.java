@@ -12,6 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -51,28 +54,32 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New contact added: %1$s";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book";
 
-    private final Contact toAdd;
+    private static final Logger logger = LogsCenter.getLogger(AddCommand.class);
+
+    private final Contact contactToAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Contact}
      */
     public AddCommand(Contact contact) {
         requireNonNull(contact);
-        toAdd = contact;
+        contactToAdd = contact;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasContact(toAdd)) {
+        if (model.hasContact(contactToAdd)) {
+            logger.info("Contact already exists");
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
-        model.addContact(toAdd);
+        model.addContact(contactToAdd);
 
-        assert model.hasContact(toAdd) : "Contact should have been added";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        assert model.hasContact(contactToAdd) : "Contact should have been added";
+        logger.fine(String.format("Added contact: %s", contactToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(contactToAdd)));
     }
 
     @Override
@@ -87,13 +94,13 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return contactToAdd.equals(otherAddCommand.contactToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAdd", contactToAdd)
                 .toString();
     }
 }
