@@ -10,8 +10,8 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* William: Usage of AI Tools (Open AI) to help in extending tests to support different contact types and favourite contacts,
-subsequently verified. Namely in:
+* William: Usage of AI Tools (Open AI) to assist in extending tests to support different contact types and favourite contacts,
+subsequently verified and tweaked accordingly. Namely in:
 `FavouriteStatusTest.java`, `HalalStatusTest.java`,
 `OpeningHourTest.java`, `ClosingHourTest.java`,
 `AccommodationStarsTest.java`, `EditContactDescriptorTest.java`,
@@ -19,7 +19,10 @@ subsequently verified. Namely in:
 `ContactIsFavouritePredicateTest.java`, `FavouriteAddCommandTest.java`,
 `FavouriteRemoveCommandTest.java`, `FavouriteViewCommandTest.java`,
 `FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`
-* William: Usage of AI Tools as an extra layer of checks for bugs and typos.
+* William: Usage of AI Tools (Open AI) to assist in creating Plant UML diagrams which are subsequently verified and
+tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
+`EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.pml`
+* William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
 
 --------------------------------------------------------------------------------------------------------------------
 
