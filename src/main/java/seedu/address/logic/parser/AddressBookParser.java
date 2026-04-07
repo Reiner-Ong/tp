@@ -17,6 +17,7 @@ import seedu.address.logic.commands.contact.ListCommand;
 import seedu.address.logic.commands.favourite.FavouriteAddCommand;
 import seedu.address.logic.commands.favourite.FavouriteRemoveCommand;
 import seedu.address.logic.commands.favourite.FavouriteViewCommand;
+import seedu.address.logic.commands.favourite.TourFavouriteAddCommand;
 import seedu.address.logic.commands.general.ClearCommand;
 import seedu.address.logic.commands.general.ExitCommand;
 import seedu.address.logic.commands.general.HelpCommand;
@@ -118,6 +119,9 @@ public class AddressBookParser {
 
         case TourFindCommand.COMMAND_WORD:
             return new TourFindCommandParser().parse(arguments);
+
+        case TourFavouriteAddCommand.COMMAND_WORD:
+            return new TourFavouriteAddCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
