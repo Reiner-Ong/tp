@@ -18,7 +18,8 @@ subsequently verified and tweaked accordingly. Namely in:
 `FnbTest.java`, `AttractionTest.java`, `AccommodationTest.java`,
 `ContactIsFavouritePredicateTest.java`, `FavouriteAddCommandTest.java`,
 `FavouriteRemoveCommandTest.java`, `FavouriteViewCommandTest.java`,
-`FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`
+`FavouriteAddCommandParserTest.java`, `FavouriteRemoveCommandParserTest.java`,
+`EditCommandTest.java`, `AddCommandParserTest.java`
 * William: Usage of AI Tools (Open AI) to assist in creating Plant UML diagrams which are subsequently verified and
 tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
 `EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.pml`

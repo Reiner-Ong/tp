@@ -88,6 +88,93 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_editPersonWithHalalStatus_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withHalalStatus("true")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editPersonWithOpeningHour_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withOpeningHour("09:00")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editPersonWithStars_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withStars("5")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editFnbWithStars_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withStars("4")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_SECOND_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editAttractionWithHalalStatus_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withHalalStatus("true")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editAccommodationWithOpeningHour_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withOpeningHour("08:00")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void execute_editPersonWithMultipleNonApplicableFields_failure() {
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withHalalStatus("true")
+                .withOpeningHour("09:00")
+                .withClosingHour("18:00")
+                .withStars("5")
+                .build();
+
+        EditCommand command = new EditCommand(INDEX_FIRST_CONTACT, descriptor);
+
+        assertCommandFailure(command, model,
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, EditCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showContactAtIndex(model, INDEX_FIRST_CONTACT);
 

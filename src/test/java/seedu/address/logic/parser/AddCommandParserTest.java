@@ -29,9 +29,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HALAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -148,6 +152,82 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, validExpectedContactString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
+    }
+
+
+    @Test
+    public void parse_personWithHalalStatus_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + " " + PREFIX_HALAL_STATUS + "true",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_personWithOpeningHour_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + " " + PREFIX_OPENING_HOUR + "09:00",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_personWithClosingHour_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + " " + PREFIX_CLOSING_HOUR + "18:00",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_personWithStars_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + " " + PREFIX_STARS + "5",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_fnbWithOpeningHour_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_OPENING_HOUR + "09:00",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_fnbWithStars_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_STARS + "4",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_attractionWithHalalStatus_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_HALAL_STATUS + "true",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_accommodationWithOpeningHour_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_BOB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_OPENING_HOUR + "08:00",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_personWithMultipleNonApplicableFields_failure() {
+        assertParseFailure(parser,
+                TYPE_DESC_AMY + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                        + " " + PREFIX_HALAL_STATUS + "true"
+                        + " " + PREFIX_OPENING_HOUR + "09:00"
+                        + " " + PREFIX_CLOSING_HOUR + "18:00"
+                        + " " + PREFIX_STARS + "5",
+                String.format(Messages.MESSAGE_NON_APPLICABLE_FIELDS, AddCommand.MESSAGE_USAGE));
     }
 
     @Test

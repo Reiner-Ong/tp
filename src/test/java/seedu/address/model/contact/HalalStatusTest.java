@@ -35,6 +35,8 @@ public class HalalStatusTest {
         // valid halal statuses
         assertTrue(HalalStatus.isValidHalalStatus("true"));
         assertTrue(HalalStatus.isValidHalalStatus("false"));
+        assertTrue(HalalStatus.isValidHalalStatus("True"));
+        assertTrue(HalalStatus.isValidHalalStatus("False"));
         assertTrue(HalalStatus.isValidHalalStatus("TRUE"));
         assertTrue(HalalStatus.isValidHalalStatus("FALSE"));
     }
@@ -43,6 +45,10 @@ public class HalalStatusTest {
     public void toString_validValues_success() {
         assertEquals("Halal", new HalalStatus("true").toString());
         assertEquals("Non-Halal", new HalalStatus("false").toString());
+        assertEquals("Halal", new HalalStatus("True").toString());
+        assertEquals("Non-Halal", new HalalStatus("False").toString());
+        assertEquals("Halal", new HalalStatus("TRUE").toString());
+        assertEquals("Non-Halal", new HalalStatus("FALSE").toString());
     }
 
     @Test
