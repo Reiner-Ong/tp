@@ -52,10 +52,9 @@ public class TourUnassignCommand extends Command {
         Contact contact = getContact(model.getFilteredContactList(), contactIndex);
         Tour tour = getTour(model.getFilteredTourList(), tourIndex);
         validateIsAssigned(contact, tour);
-        Contact updatedContact = buildContactWithTourRemoved(contact, tour);
-        model.setContact(contact, updatedContact);
+        model.unassignTour(contact, tour);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
+        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(contact)));
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
@@ -80,17 +79,6 @@ public class TourUnassignCommand extends Command {
         if (!contact.isInTour(tour)) {
             throw new CommandException(MESSAGE_NOT_IN_TOUR);
         }
-    }
-
-    private static Contact buildContactWithTourRemoved(Contact contact, Tour tour) {
-        Set<Tour> updatedTours = new HashSet<>(contact.getTours());
-        updatedTours.remove(tour);
-        assert !updatedTours.contains(tour) : "Tour must not be present in the set after removing";
-        EditCommand.EditContactDescriptor descriptor = new EditCommand.EditContactDescriptor();
-        descriptor.setTours(updatedTours);
-        Contact updatedContact = contact.edit(descriptor);
-        assert updatedContact != null : "Edited contact must not be null";
-        return updatedContact;
     }
 
     @Override

@@ -121,6 +121,18 @@ public interface Model {
      */
     void addTour(Tour tour);
 
+    /**
+     * Assigns the given tour to the given contact.
+     * {@code contact} and {@code tour} must exist in the address book.
+     */
+    void assignTour(Contact contact, Tour tour);
+
+    /**
+     * Unassigns the given tour from the given contact.
+     * {@code contact} and {@code tour} must exist in the address book.
+     */
+    void unassignTour(Contact contact, Tour tour);
+
     /** Returns an unmodifiable view of the filtered contact list */
     ObservableList<Contact> getFilteredContactList();
 

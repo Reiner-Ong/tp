@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.contact.EditCommand;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.tour.Tour;
 
@@ -154,6 +157,18 @@ public class ModelManager implements Model {
     public void addTour(Tour tour) {
         addressBook.addTour(tour);
         updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS);
+    }
+
+    @Override
+    public void assignTour(Contact contact, Tour tour) {
+        requireAllNonNull(contact, tour);
+        setContact(contact, contact.withTourAdded(tour));
+    }
+
+    @Override
+    public void unassignTour(Contact contact, Tour tour) {
+        requireAllNonNull(contact, tour);
+        setContact(contact, contact.withTourRemoved(tour));
     }
 
     //=========== Filtered Contact List Accessors =============================================================
