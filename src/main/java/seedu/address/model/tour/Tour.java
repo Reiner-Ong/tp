@@ -41,7 +41,7 @@ public class Tour {
         requireNonNull(tourName);
         checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
         this.tourName = tourName;
-        this.isFavourite = new FavouriteStatus("false");
+        this.isFavourite = isFavourite;
     }
 
     /**

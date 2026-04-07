@@ -57,7 +57,7 @@ public class UniqueTourList implements Iterable<Tour> {
             throw new TourNotFoundException();
         }
 
-        if (contains(editedTour)) {
+        if (!target.equals(editedTour) && contains(editedTour)) {
             throw new DuplicateTourException();
         }
 
