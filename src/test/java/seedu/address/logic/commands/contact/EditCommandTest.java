@@ -14,6 +14,9 @@ import static seedu.address.logic.commands.CommandTestUtil.showContactAtIndex;
 import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONTACT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FNB_CONTACT;;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ATTRACTION_CONTACT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ACCOMMODATION_CONTACT;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +29,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.contact.Contact;
+import seedu.address.testutil.AccommodationBuilder;
+import seedu.address.testutil.AttractionBuilder;
 import seedu.address.testutil.ContactBuilder;
 import seedu.address.testutil.EditContactDescriptorBuilder;
+import seedu.address.testutil.FnbBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -83,6 +89,75 @@ public class EditCommandTest {
                 Messages.format(editedContact));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editFnbWithHalalStatus_success() {
+        Contact contactToEdit = model.getFilteredContactList().get(INDEX_FNB_CONTACT.getZeroBased());
+
+        FnbBuilder halalFnbBuilder = (FnbBuilder) ContactBuilder.fromContact(contactToEdit);
+        halalFnbBuilder.withHalalStatus("true");
+        Contact editedContact = halalFnbBuilder.build();
+
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withHalalStatus("true")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_FNB_CONTACT, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(contactToEdit, editedContact);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editAttractionWithOpeningAndClosingHour_success() {
+        Contact contactToEdit = model.getFilteredContactList().get(INDEX_ATTRACTION_CONTACT.getZeroBased());
+
+        AttractionBuilder attractionBuilder = (AttractionBuilder) ContactBuilder.fromContact(contactToEdit);
+        attractionBuilder.withOpeningHour("09:00");
+        attractionBuilder.withClosingHour("18:00");
+        Contact editedContact = attractionBuilder.build();
+
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withOpeningHour("09:00")
+                .withClosingHour("18:00")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_ATTRACTION_CONTACT, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(contactToEdit, editedContact);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editAccommodationWithStars_success() {
+        Contact contactToEdit = model.getFilteredContactList().get(INDEX_ACCOMMODATION_CONTACT.getZeroBased());
+
+        AccommodationBuilder accommodationBuilder =
+                (AccommodationBuilder) ContactBuilder.fromContact(contactToEdit);
+        accommodationBuilder.withStars("5");
+        Contact editedContact = accommodationBuilder.build();
+
+        EditContactDescriptor descriptor = new EditContactDescriptorBuilder()
+                .withStars("5")
+                .build();
+        EditCommand editCommand = new EditCommand(INDEX_ACCOMMODATION_CONTACT, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CONTACT_SUCCESS,
+                Messages.format(editedContact));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setContact(contactToEdit, editedContact);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

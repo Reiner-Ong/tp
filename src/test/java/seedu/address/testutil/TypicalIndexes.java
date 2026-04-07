@@ -11,4 +11,7 @@ public class TypicalIndexes {
     public static final Index INDEX_THIRD_CONTACT = Index.fromOneBased(3);
     public static final Index INDEX_FIRST_TOUR = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_TOUR = Index.fromOneBased(2);
+    public static final Index INDEX_FNB_CONTACT = Index.fromOneBased(7);
+    public static final Index INDEX_ATTRACTION_CONTACT = Index.fromOneBased(8);
+    public static final Index INDEX_ACCOMMODATION_CONTACT = Index.fromOneBased(9);
 }

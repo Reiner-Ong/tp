@@ -19,8 +19,11 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_ACCOMMODATION;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_ATTRACTION;
 import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.TYPE_DESC_FNB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -50,10 +53,14 @@ import seedu.address.logic.commands.contact.AddCommand;
 import seedu.address.model.contact.Address;
 import seedu.address.model.contact.Contact;
 import seedu.address.model.contact.Email;
+import seedu.address.model.contact.Fnb;
 import seedu.address.model.contact.Name;
 import seedu.address.model.contact.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.AccommodationBuilder;
+import seedu.address.testutil.AttractionBuilder;
 import seedu.address.testutil.ContactBuilder;
+import seedu.address.testutil.FnbBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
@@ -154,6 +161,55 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
     }
 
+    @Test
+    public void parse_fnbWithHalalStatus_success() {
+        Contact expectedContact = new FnbBuilder()
+                .withHalalStatus("true")
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                TYPE_DESC_FNB + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_HALAL_STATUS + "true",
+                new AddCommand(expectedContact));
+    }
+
+    @Test
+    public void parse_attractionWithOpeningAndClosingHour_success() {
+        Contact expectedContact = new AttractionBuilder()
+                .withOpeningHour("09:00")
+                .withClosingHour("18:00")
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                TYPE_DESC_ATTRACTION + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_OPENING_HOUR + "09:00"
+                        + " " + PREFIX_CLOSING_HOUR + "18:00",
+                new AddCommand(expectedContact));
+    }
+
+    @Test
+    public void parse_accommodationWithStars_success() {
+        Contact expectedContact = new AccommodationBuilder()
+                .withStars("5")
+                .withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB)
+                .withEmail(VALID_EMAIL_BOB)
+                .withAddress(VALID_ADDRESS_BOB)
+                .build();
+
+        assertParseSuccess(parser,
+                TYPE_DESC_ACCOMMODATION + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + " " + PREFIX_STARS + "5",
+                new AddCommand(expectedContact));
+    }
 
     @Test
     public void parse_personWithHalalStatus_failure() {
