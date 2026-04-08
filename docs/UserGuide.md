@@ -195,7 +195,7 @@ Adds a contact to the contact list.
  [s/STARS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A contact can have any number of tags (including 0)
+A contact can have any number of tags (including 0). Each tag must be at most 30 characters long.
 </div>
 
 **General Fields & Constraints**
@@ -204,7 +204,7 @@ A contact can have any number of tags (including 0)
 * `p/PHONE` — only numbers allowed, and must contain at least 3 digits
 * `e/EMAIL` — a valid email in the form `LOCAL-PART@DOMAIN`
 * `a/ADDRESS` — cannot be blank
-* `t/TAG` — only alphanumeric characters allowed
+* `t/TAG` — only alphanumeric characters allowed, and must be at most 30 characters long
 
 <details>
 <summary><b>Valid Email Rules:</b></summary>
