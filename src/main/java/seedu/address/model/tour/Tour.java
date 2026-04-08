@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
-import seedu.address.model.contact.FavouriteStatus;
-
 
 /**
  * Represents a tour package, which is identified by its String name
@@ -17,7 +15,7 @@ public class Tour {
     public static final String VALIDATION_REGEX = "^[A-Za-z0-9 ]+$";
 
     public final String tourName;
-    private final FavouriteStatus isFavourite;
+    private final TourFavouriteStatus isTourFavourite;
 
     /**
      * Constructs a {@code Tour} with the given name.
@@ -28,20 +26,20 @@ public class Tour {
         requireNonNull(tourName);
         checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
         this.tourName = tourName;
-        this.isFavourite = new FavouriteStatus("false");
+        this.isTourFavourite = new TourFavouriteStatus("false");
     }
 
     /**
-     * Constructs a {@code Tour} with the given name and specified Favourite status.
+     * Constructs a {@code Tour} with the given name and specified Tour Favourite status.
      *
      * @param tourName the name of the tour
-     * @param isFavourite favourite status of the tour
+     * @param isTourFavourite favourite status of the tour
      */
-    public Tour(String tourName, FavouriteStatus isFavourite) {
+    public Tour(String tourName, TourFavouriteStatus isTourFavourite) {
         requireNonNull(tourName);
         checkArgument(isValidTourName(tourName), MESSAGE_CONSTRAINTS);
         this.tourName = tourName;
-        this.isFavourite = isFavourite;
+        this.isTourFavourite = isTourFavourite;
     }
 
     /**
@@ -65,18 +63,18 @@ public class Tour {
     /**
      * Returns a copy of the tour with its values edited.
      */
-    public Tour setFavouriteStatus(FavouriteStatus isFavourite) {
+    public Tour setTourFavouriteStatus(TourFavouriteStatus isTourFavourite) {
         String updatedName = this.getTourName();
 
-        return new Tour(updatedName, isFavourite);
+        return new Tour(updatedName, isTourFavourite);
     }
 
-    public FavouriteStatus getFavouriteStatus() {
-        return this.isFavourite;
+    public TourFavouriteStatus getTourFavouriteStatus() {
+        return this.isTourFavourite;
     }
 
-    public boolean isFavourite() {
-        return this.isFavourite.isFavourite;
+    public boolean isTourFavourite() {
+        return this.isTourFavourite.isTourFavourite;
     }
     /**
      * Returns the hash code of this tour, based on its name.

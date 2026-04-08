@@ -18,7 +18,7 @@ public class TourCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label favouriteStatus;
+    private Label tourFavouriteStatus;
 
     /**
      * Creates a {@code TourCard} with the given {@code Tour} and index to display.
@@ -28,7 +28,7 @@ public class TourCard extends UiPart<Region> {
         this.tour = tour;
         id.setText(displayedIndex + ". ");
         tourName.setText(tour.getTourName());
-        favouriteStatus.setVisible(tour.isFavourite());
-        favouriteStatus.setManaged(tour.isFavourite());
+        tourFavouriteStatus.setVisible(tour.isTourFavourite());
+        tourFavouriteStatus.setManaged(tour.isTourFavourite());
     }
 }

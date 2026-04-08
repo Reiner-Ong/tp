@@ -11,6 +11,6 @@ public class TourIsFavouritePredicate implements Predicate<Tour> {
 
     @Override
     public boolean test(Tour tour) {
-        return tour.isFavourite();
+        return tour.isTourFavourite();
     }
 }

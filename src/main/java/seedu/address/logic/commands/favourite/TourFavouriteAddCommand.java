@@ -2,7 +2,7 @@ package seedu.address.logic.commands.favourite;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TOURS;
-import static seedu.address.model.contact.FavouriteStatus.VALID_FAVOURITE_STATUS_TRUE;
+import static seedu.address.model.tour.TourFavouriteStatus.VALID_TOUR_FAVOURITE_STATUS_TRUE;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,8 +15,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.FavouriteStatus;
 import seedu.address.model.tour.Tour;
+import seedu.address.model.tour.TourFavouriteStatus;
 
 /**
  * Adds an existing tour in the address book to favourites.
@@ -30,8 +30,8 @@ public class TourFavouriteAddCommand extends Command {
             + "Parameters: TOUR_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ADD_FAVOURITE_SUCCESS = "Added tour package to favourites: %1$s";
-    public static final String MESSAGE_DUPLICATE_FAVOURITE = "Tour package is already in favourites.";
+    public static final String MESSAGE_ADD_TOUR_FAVOURITE_SUCCESS = "Added tour package to favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_TOUR_FAVOURITE = "Tour package is already in favourites.";
 
 
     private static final Logger logger = LogsCenter.getLogger(TourFavouriteAddCommand.class);
@@ -55,7 +55,7 @@ public class TourFavouriteAddCommand extends Command {
         model.commitAddressBook();
         logger.fine(String.format("Added tour to favourites: %s", editedTour));
         model.updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS);
-        return new CommandResult(String.format(MESSAGE_ADD_FAVOURITE_SUCCESS, Messages.format(editedTour)));
+        return new CommandResult(String.format(MESSAGE_ADD_TOUR_FAVOURITE_SUCCESS, Messages.format(editedTour)));
     }
 
     /**
@@ -72,9 +72,9 @@ public class TourFavouriteAddCommand extends Command {
         Tour tourToEdit = lastShownTourList.get(tourIndex.getZeroBased());
         assert tourToEdit != null : "Tour from tour list must not be null.";
 
-        if (tourToEdit.isFavourite()) {
+        if (tourToEdit.isTourFavourite()) {
             logger.info("Tour is already in favourites");
-            throw new CommandException(MESSAGE_DUPLICATE_FAVOURITE);
+            throw new CommandException(MESSAGE_DUPLICATE_TOUR_FAVOURITE);
         }
 
         return tourToEdit;
@@ -86,10 +86,10 @@ public class TourFavouriteAddCommand extends Command {
     private Tour setTourFavouriteStatus(Tour tourToEdit) {
         requireNonNull(tourToEdit);
 
-        Tour editedTour = tourToEdit.setFavouriteStatus(new FavouriteStatus(VALID_FAVOURITE_STATUS_TRUE));
+        Tour editedTour = tourToEdit.setTourFavouriteStatus(new TourFavouriteStatus(VALID_TOUR_FAVOURITE_STATUS_TRUE));
 
         assert editedTour != null : "Edited tour must not be null.";
-        assert editedTour.isFavourite() : "Tour must have been added to favourites.";
+        assert editedTour.isTourFavourite() : "Tour must have been added to favourites.";
 
         return editedTour;
     }

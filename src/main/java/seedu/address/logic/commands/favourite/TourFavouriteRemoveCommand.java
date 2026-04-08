@@ -2,7 +2,7 @@ package seedu.address.logic.commands.favourite;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TOURS;
-import static seedu.address.model.contact.FavouriteStatus.VALID_FAVOURITE_STATUS_FALSE;
+import static seedu.address.model.tour.TourFavouriteStatus.VALID_TOUR_FAVOURITE_STATUS_FALSE;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,11 +15,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.contact.FavouriteStatus;
 import seedu.address.model.tour.Tour;
+import seedu.address.model.tour.TourFavouriteStatus;
 
 /**
- * Removes an existing contact in the address book from favourites.
+ * Removes an existing tour in the address book from favourites.
  */
 public class TourFavouriteRemoveCommand extends Command {
     public static final String COMMAND_WORD = "tour-favourite-remove";
@@ -30,8 +30,8 @@ public class TourFavouriteRemoveCommand extends Command {
             + "Parameters: TOUR_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_REMOVE_FAVOURITE_SUCCESS = "Removed tour package from favourites: %1$s";
-    public static final String MESSAGE_DUPLICATE_NON_FAVOURITE = "Tour package is already not in favourites.";
+    public static final String MESSAGE_REMOVE_TOUR_FAVOURITE_SUCCESS = "Removed tour package from favourites: %1$s";
+    public static final String MESSAGE_DUPLICATE_NON_TOUR_FAVOURITE = "Tour package is already not in favourites.";
 
 
     private static final Logger logger = LogsCenter.getLogger(TourFavouriteRemoveCommand.class);
@@ -57,17 +57,17 @@ public class TourFavouriteRemoveCommand extends Command {
 
         Tour tourToEdit = lastShownTourList.get(tourIndex.getZeroBased());
 
-        if (!tourToEdit.isFavourite()) {
-            throw new CommandException(MESSAGE_DUPLICATE_NON_FAVOURITE);
+        if (!tourToEdit.isTourFavourite()) {
+            throw new CommandException(MESSAGE_DUPLICATE_NON_TOUR_FAVOURITE);
         }
 
-        Tour editedTour = tourToEdit.setFavouriteStatus(new FavouriteStatus(VALID_FAVOURITE_STATUS_FALSE));
+        Tour editedTour = tourToEdit.setTourFavouriteStatus(new TourFavouriteStatus(VALID_TOUR_FAVOURITE_STATUS_FALSE));
 
         model.setTour(tourToEdit, editedTour);
         model.commitAddressBook();
         logger.fine(String.format("Removed tour from favourites: %s", editedTour));
         model.updateFilteredTourList(PREDICATE_SHOW_ALL_TOURS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_FAVOURITE_SUCCESS, Messages.format(editedTour)));
+        return new CommandResult(String.format(MESSAGE_REMOVE_TOUR_FAVOURITE_SUCCESS, Messages.format(editedTour)));
     }
 
     @Override
