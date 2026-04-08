@@ -239,7 +239,7 @@ A contact can have any number of tags (including 0)
 * **Accommodation contacts**: `[s/STARS]` — must be `1–5` (default: `3`)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important:**
-Fields that are not applicable to the specified contact type will be ignored.
+Fields that are not applicable to the specified contact type will be rejected.
 For example, `h/true` will not apply to `person` contacts.
 </div>
 
