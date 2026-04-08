@@ -26,7 +26,6 @@ public class TourListCommandTest {
 
     @Test
     public void execute_listTours_success() {
-        StringBuilder expectedMessage = new StringBuilder(TourListCommand.MESSAGE_SUCCESS);
-        assertCommandSuccess(new TourListCommand(), model, expectedMessage.toString(), expectedModel);
+        assertCommandSuccess(new TourListCommand(), model, TourListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
