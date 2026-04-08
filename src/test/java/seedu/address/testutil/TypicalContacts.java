@@ -29,8 +29,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INDIAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_STAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_NAME_HALLOWEEN_WALK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_NAME_JAMES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_NAME_JAMES_JR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOUR_NAME_JAMES_SR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -116,6 +118,8 @@ public class TypicalContacts {
     // Tour
     public static final Tour TOUR_JAMES = new Tour(VALID_TOUR_NAME_JAMES);
     public static final Tour TOUR_JAMES_JR = new Tour(VALID_TOUR_NAME_JAMES_JR);
+    public static final Tour TOUR_JAMES_SR = new Tour(VALID_TOUR_NAME_JAMES_SR);
+    public static final Tour TOUR_HALLOWEEN_WALK = new Tour(VALID_TOUR_NAME_HALLOWEEN_WALK);
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
