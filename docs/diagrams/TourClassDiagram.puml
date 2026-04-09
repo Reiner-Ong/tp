@@ -1,29 +1,17 @@
 @startuml
-skinparam style strictuml
-skinparam monochrome true
-skinparam shadowing false
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
 
-class Tour {
-    + {static} MESSAGE_CONSTRAINTS: String
-    + {static} VALIDATION_REGEX: String
-    + tourName: String
-    - isTourFavourite: TourFavouriteStatus
-
-    + Tour(tourName: String)
-    + Tour(tourName: String, isTourFavourite: TourFavouriteStatus)
-    + {static} isValidTourName(test: String): boolean
-    + getTourName(): String
-    + setTourFavouriteStatus(isTourFavourite: TourFavouriteStatus): Tour
-    + getTourFavouriteStatus(): TourFavouriteStatus
-    + isTourFavourite(): boolean
-    + hashCode(): int
-    + equals(other: Object): boolean
-    + toString(): String
+Package Tour as TourPackage <<Rectangle>> {
+    Class Tour
+    Class TourFavouriteStatus
+    Class TourName <<Value Object>>
 }
 
-class TourFavouriteStatus {
-    <<Value Object>>
-}
-
+Tour *--> "1" TourName
 Tour *--> "1" TourFavouriteStatus
-@enduml
+
+Note bottom of TourName: VALIDATION_REGEX = "^[A-Za-z0-9 ]+$"
+@enduml 
