@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.tour.TourDuplicateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tour.Tour;
 
 /**
  * Parses input arguments and creates a new TourDuplicateCommand object.
@@ -35,9 +36,11 @@ public class TourDuplicateCommandParser implements Parser<TourDuplicateCommand> 
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
-        String name = argMultimap.getValue(PREFIX_NAME).get();
+        String nameValue = argMultimap.getValue(PREFIX_NAME).get();
+        Tour tour = ParserUtil.parseTour(nameValue);
+        String validatedName = tour.getTourName();
 
-        return new TourDuplicateCommand(index, name);
+        return new TourDuplicateCommand(index, validatedName);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

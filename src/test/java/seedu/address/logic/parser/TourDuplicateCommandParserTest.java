@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.tour.TourDuplicateCommand;
+import seedu.address.model.tour.Tour;
 
 public class TourDuplicateCommandParserTest {
 
@@ -67,6 +68,11 @@ public class TourDuplicateCommandParserTest {
     public void parse_nonIntegerIndex_failure() {
         assertParseFailure(parser, "abc n/New Tour Name",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, TourDuplicateCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidName_returnsFailure() {
+        assertParseFailure(parser, "1 n/Invalid@Tour#Name", Tour.MESSAGE_CONSTRAINTS);
     }
 
     @Test
