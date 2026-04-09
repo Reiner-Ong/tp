@@ -1,0 +1,29 @@
+@startuml
+skinparam style strictuml
+skinparam monochrome true
+skinparam shadowing false
+
+class Tour {
+    + {static} MESSAGE_CONSTRAINTS: String
+    + {static} VALIDATION_REGEX: String
+    + tourName: String
+    - isTourFavourite: TourFavouriteStatus
+
+    + Tour(tourName: String)
+    + Tour(tourName: String, isTourFavourite: TourFavouriteStatus)
+    + {static} isValidTourName(test: String): boolean
+    + getTourName(): String
+    + setTourFavouriteStatus(isTourFavourite: TourFavouriteStatus): Tour
+    + getTourFavouriteStatus(): TourFavouriteStatus
+    + isTourFavourite(): boolean
+    + hashCode(): int
+    + equals(other: Object): boolean
+    + toString(): String
+}
+
+class TourFavouriteStatus {
+    <<Value Object>>
+}
+
+Tour *--> "1" TourFavouriteStatus
+@enduml
