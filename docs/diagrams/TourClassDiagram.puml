@@ -14,4 +14,4 @@ Tour *--> "1" TourName
 Tour *--> "1" TourFavouriteStatus
 
 Note bottom of TourName: VALIDATION_REGEX = "^[A-Za-z0-9 ]+$"
-@enduml 
+@enduml
