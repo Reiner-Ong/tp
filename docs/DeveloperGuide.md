@@ -186,6 +186,14 @@ extended to include these additional fields.
 
 <img src="images/EditContactDescriptorClassDiagram.png" width="600" />
 
+### Tour Packages
+
+Bivago's content management supports the creation of tour packages, represented by `Tour` class. Each `Tour` is 
+uniquely identified by its `Name`. The class `TourFavouriteStatus` serves as a wrapper class for the boolean state 
+of the tour.
+
+<img src="images/TourClassDiagram.png" width="600" />
+
 ### Contact Favourites
 
 Bivago also supports marking certain contacts as favourites, which is useful for managing important, commonly used,
