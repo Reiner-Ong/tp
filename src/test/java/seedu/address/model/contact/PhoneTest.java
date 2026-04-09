@@ -39,6 +39,7 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("81231231(House)")); // number with label
         assertTrue(Phone.isValidPhone("81231231(House) | 1241242(Personal)")); // multiple numbers with labels
         assertTrue(Phone.isValidPhone("9312 1534")); // spaces within digits now allowed
+        assertTrue(Phone.isValidPhone("+6581231231")); // international format with country code
     }
 
     @Test
