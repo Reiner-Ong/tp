@@ -120,6 +120,12 @@ Exits the program.
 
 **Format:** `exit`
 
+### Clearing the app : `clear`
+
+Clears all data from the app.
+
+**Format:** `clear`
+
 ### Undoing the last command: `undo`
 
 Undoes the previous command.
@@ -176,10 +182,10 @@ manually.
 
 ### Editing the data file
 
-Bivago data are saved automatically as a JSON file `[JAR file location]/data/bivago-data.json`.
+Bivago data are saved automatically as a JSON file `[JAR file location]/data/bivago-data.json`. Advanced users are welcome to update data by directly editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Warning:**
-Do not manually edit the data file. Any modifications that result in an invalid format or out-of-range values will cause Bivago to not work as intended. Always use the commands provided by the app to make changes to your data.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, or make certain values invalid, Bivago will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of a file before editing it.
 </div>
 
 ---
@@ -248,7 +254,8 @@ For example, `h/true` will not apply to `person` contacts.
 
 <ul>
   <li><code>add type/person n/John Doe p/98765432 e/johnd@example.com a/311 Clementi Ave 2</code> :
-  Adds a person contact named <code>John Doe</code> to the contact list.</li>
+  Adds a person contact named <code>John Doe</code> to the contact list.<br>
+  <img src="images/AddCommandExample.png" alt="AddCommandExample></li>
 
   <li><code>add type/fnb n/Nasi Lemak Stall p/91234567 e/fnb@example.com a/Market Street h/true</code> :
   Adds an F&amp;B contact named <code>Nasi Lemak Stall</code> with halal status set to <code>true</code>.</li>
@@ -562,22 +569,11 @@ Removes a specified tour as a favourite tour.
 
 ---
 
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous Bivago home folder.
-
----
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only
    the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the
    application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut
-   `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to
-   manually restore the minimized Help Window.
 
 ---
 
@@ -585,12 +581,13 @@ the data of your previous Bivago home folder.
 
 ### General
 
-| Action   | Command | Summary                    |
-|----------|---------|----------------------------|
-| **Help** | `help`  | Displays a help message    |
-| **Exit** | `exit`  | Closes the program         |
-| **Undo** | `undo`  | Undo the previous command  |
-| **Redo** | `redo`  | Restores an undone command |
+| Action    | Command | Summary                    |
+|-----------|---------|----------------------------|
+| **Help**  | `help`  | Displays a help message    |
+| **Exit**  | `exit`  | Closes the program         |
+| **Clear** | `clear` | Clears all data            |
+| **Undo**  | `undo`  | Undo the previous command  |
+| **Redo**  | `redo`  | Restores an undone command |
 
 ### Contact Management
 
