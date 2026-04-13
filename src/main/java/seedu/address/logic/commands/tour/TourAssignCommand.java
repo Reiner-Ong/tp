@@ -53,10 +53,11 @@ public class TourAssignCommand extends Command {
         Tour tour = getTour(model.getFilteredTourList(), tourIndex);
         validateNotAssigned(contact, tour);
         model.assignTour(contact, tour);
+        Contact updatedContact = getContact(model.getFilteredContactList(), contactIndex);
         model.commitAddressBook();
 
-        logger.fine(String.format("Assigned tour to contact: %s", contact));
-        return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(contact)));
+        logger.fine(String.format("Assigned tour to contact: %s", updatedContact));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
