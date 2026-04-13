@@ -54,9 +54,10 @@ public class TourUnassignCommand extends Command {
         Tour tour = getTour(model.getFilteredTourList(), tourIndex);
         validateIsAssigned(contact, tour);
         model.unassignTour(contact, tour);
+        Contact updatedContact = getContact(model.getFilteredContactList(), contactIndex);
         model.commitAddressBook();
-        logger.fine(String.format("Unassigned tour from contact: %s", contact));
-        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(contact)));
+        logger.fine(String.format("Unassigned tour from contact: %s", updatedContact));
+        return new CommandResult(String.format(MESSAGE_UNASSIGN_TOUR_SUCCESS, Messages.format(updatedContact)));
     }
 
     private static Contact getContact(List<Contact> contactList, Index index) throws CommandException {
