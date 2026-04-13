@@ -25,6 +25,13 @@ tweaked to accurately reflect current implementation. Namely in: `ContactClassDi
 `EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.puml`
 * William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
 
+
+* Reiner: Usage of AI Tools (Claude) to assist in extending tests for tour assign, unassign, and view features, as well as their related test files. All AI-generated code was subsequently verified and tweaked to ensure correctness and consistency with the rest of the codebase. Namely in:
+`TourAssignCommandTest.java`, `TourUnassignCommandTest.java`, `TourViewCommandTest.java`, `TourAssignCommandParserTest.java`, `TourUnassignCommandParserTest.java`, `TourViewCommandParserTest.java`
+* Reiner: Usage of AI Tools (Claude) to assist in creating Plant UML diagrams which are subsequently verified and
+tweaked to accurately reflect current implementation. Namely in: `TourAssignSequenceDiagram.puml`, `TourUnassignSequenceDiagram.puml`, `TourViewSequenceDiagram.puml`
+* Reiner: Usage of AI Tools (Claude) as an extra layer of checks for bugs and typos.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
