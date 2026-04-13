@@ -65,4 +65,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} contains an alphabetical character.
+     */
+    public static boolean containsAlphabet(String s) {
+        requireNonNull(s);
+        return s.matches(".*[a-zA-Z].*");
+    }
 }

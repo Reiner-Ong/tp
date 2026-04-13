@@ -140,4 +140,45 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for containsAlphabet --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, empty, alphabets only, non-alphabets only, alphabets + non-alphabets
+     *
+     * Possible scenarios returning true:
+     *   - alphabets only
+     *   - alphabets + non-alphabets
+     *
+     * Possible scenarios returning false:
+     *   - empty
+     *   - non-alphabets only
+     */
+
+    @Test
+    public void containsAlphabet_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsAlphabet(null));
+    }
+
+    @Test
+    public void containsAlphabet_validInputs_correctResult() {
+
+        // empty
+        assertFalse(StringUtil.containsAlphabet(""));
+
+        // non-alphabets only
+        assertFalse(StringUtil.containsAlphabet(" 1  2[]4   $5$  ^ @!  $   "));
+
+        // alphabets only
+        assertTrue(StringUtil.containsAlphabet("a"));
+        assertTrue(StringUtil.containsAlphabet("A"));
+        assertTrue(StringUtil.containsAlphabet("aonfijsbjifksbjkfsdfksjdf"));
+        assertTrue(StringUtil.containsAlphabet("asjAJLNDjklASNDjklANSJKldHNDS"));
+
+        // alphabets + non-alphabets
+        assertTrue(StringUtil.containsAlphabet("a1"));
+        assertTrue(StringUtil.containsAlphabet("2b"));
+        assertTrue(StringUtil.containsAlphabet(" e "));
+        assertTrue(StringUtil.containsAlphabet("lebron james 1337"));
+        assertTrue(StringUtil.containsAlphabet("     e    (&^&@* $1 23 13^&(@#$^(   &@#(&$"));
+    }
 }
