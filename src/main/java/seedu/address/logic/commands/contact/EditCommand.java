@@ -104,7 +104,6 @@ public class EditCommand extends Command {
         assert contactToEdit != editedContact : "Original contact must have been edited";
         logger.fine(String.format("Edited contact from %s to %s", contactToEdit, editedContact));
 
-        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
