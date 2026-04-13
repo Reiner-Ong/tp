@@ -223,7 +223,7 @@ Bivago supports assigning and unassigning contacts to tour packages, as well as 
 
 <img src="images/TourUnassignSequenceDiagram.png" width="600" />
 
-`TourViewCommand` performs a similar operation to `FindCommand`, making use of `ContactIsInTourPredicate` to filter the contact list to only those assigned to the specified tour. The tour list is first reset to show all tours so that the index lookup is not affected by any prior filtering.
+`TourViewCommand` performs a similar operation to `FindCommand`, making use of `ContactIsInTourPredicate` to filter the contact list to only those assigned to the specified tour. The tour index is resolved against the currently displayed tour list, consistent with how other commands treat displayed indices.
 
 <img src="images/TourViewSequenceDiagram.png" width="600" />
 

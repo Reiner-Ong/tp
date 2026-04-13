@@ -101,10 +101,11 @@ public class EditCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.commitAddressBook();
-        assert contactToEdit != editedContact : "Original contact must have been edited";
         logger.fine(String.format("Edited contact from %s to %s", contactToEdit, editedContact));
 
-        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
+        String warning = Messages.getFieldOverlapWarning(model, editedContact, contactToEdit);
+        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact))
+                + warning);
     }
 
     /**

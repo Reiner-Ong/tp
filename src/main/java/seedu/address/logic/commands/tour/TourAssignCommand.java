@@ -52,8 +52,8 @@ public class TourAssignCommand extends Command {
         Contact contact = getContact(model.getFilteredContactList(), contactIndex);
         Tour tour = getTour(model.getFilteredTourList(), tourIndex);
         validateNotAssigned(contact, tour);
+        Contact updatedContact = contact.withTourAdded(tour);
         model.assignTour(contact, tour);
-        Contact updatedContact = getContact(model.getFilteredContactList(), contactIndex);
         model.commitAddressBook();
 
         logger.fine(String.format("Assigned tour to contact: %s", updatedContact));
