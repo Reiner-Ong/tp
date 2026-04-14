@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.contact;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.containsAlphabet;
 import static seedu.address.logic.Messages.MESSAGE_NON_APPLICABLE_FIELDS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLOSING_HOUR;
@@ -11,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OPENING_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CONTACTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -73,7 +75,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_CONTACT_SUCCESS = "Edited Contact: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CONTACT = "This contact already exists in the address book.";
-    public static final String MESSAGE_NO_CHANGES = "The edited values are identical to the existing contact.";
+    public static final String MESSAGE_NO_ALPHABET_NAME_WARNING = "WARNING:"
+            + " The contact name does not contain any alphabets.\n";
 
     private static final Logger logger = LogsCenter.getLogger(EditCommand.class);
 
@@ -101,11 +104,15 @@ public class EditCommand extends Command {
 
         model.setContact(contactToEdit, editedContact);
         model.commitAddressBook();
+        assert contactToEdit != editedContact : "Original contact must have been edited";
         logger.fine(String.format("Edited contact from %s to %s", contactToEdit, editedContact));
 
-        String warning = Messages.getFieldOverlapWarning(model, editedContact, contactToEdit);
-        return new CommandResult(String.format(MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact))
-                + warning);
+        model.updateFilteredContactList(PREDICATE_SHOW_ALL_CONTACTS);
+        String msg = "";
+        if (!containsAlphabet(editedContact.getName().fullName)) {
+            msg += MESSAGE_NO_ALPHABET_NAME_WARNING;
+        }
+        return new CommandResult(String.format(msg + MESSAGE_EDIT_CONTACT_SUCCESS, Messages.format(editedContact)));
     }
 
     /**
@@ -131,11 +138,6 @@ public class EditCommand extends Command {
         requireNonNull(editContactDescriptor);
 
         Contact editedContact = createEditedContact(contactToEdit, editContactDescriptor);
-
-        if (contactToEdit.equals(editedContact)) {
-            logger.info("No changes detected in EditCommand");
-            throw new CommandException(MESSAGE_NO_CHANGES);
-        }
 
         if (!contactToEdit.isSameContact(editedContact) && model.hasContact(editedContact)) {
             logger.info("Contact is already the same");

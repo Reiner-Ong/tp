@@ -24,13 +24,9 @@ subsequently verified and tweaked accordingly. Namely in:
 tweaked to accurately reflect current implementation. Namely in: `ContactClassDiagram.puml`,
 `EditContactDescriptorClassDiagram.puml`, `FavouriteAddSequenceDiagram.puml`, `FavouriteViewSequenceDiagram.puml`
 * William: Usage of AI Tools (Open AI) as an extra layer of checks for bugs and typos.
-
-
-* Reiner: Usage of AI Tools (Claude) to assist in extending tests for tour assign, unassign, and view features, as well as their related test files. All AI-generated code was subsequently verified and tweaked to ensure correctness and consistency with the rest of the codebase. Namely in:
-`TourAssignCommandTest.java`, `TourUnassignCommandTest.java`, `TourViewCommandTest.java`, `TourAssignCommandParserTest.java`, `TourUnassignCommandParserTest.java`, `TourViewCommandParserTest.java`
-* Reiner: Usage of AI Tools (Claude) to assist in creating Plant UML diagrams which are subsequently verified and
-tweaked to accurately reflect current implementation. Namely in: `TourAssignSequenceDiagram.puml`, `TourUnassignSequenceDiagram.puml`, `TourViewSequenceDiagram.puml`
-* Reiner: Usage of AI Tools (Claude) as an extra layer of checks for bugs and typos.
+* Chen Yoong Shee: Usage of AI Tools (Open AI) to assist in extending tests to support tour find and tour list command,
+  subsequently verified and tweaked accordingly. Namely in:
+  `TourFindCommandTest.java`, `TourFindCommandParserTest.java`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,7 +219,7 @@ Bivago supports assigning and unassigning contacts to tour packages, as well as 
 
 <img src="images/TourUnassignSequenceDiagram.png" width="600" />
 
-`TourViewCommand` performs a similar operation to `FindCommand`, making use of `ContactIsInTourPredicate` to filter the contact list to only those assigned to the specified tour. The tour index is resolved against the currently displayed tour list, consistent with how other commands treat displayed indices.
+`TourViewCommand` performs a similar operation to `FindCommand`, making use of `ContactIsInTourPredicate` to filter the contact list to only those assigned to the specified tour. The tour list is first reset to show all tours so that the index lookup is not affected by any prior filtering.
 
 <img src="images/TourViewSequenceDiagram.png" width="600" />
 
@@ -668,7 +664,9 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 2. Bivago creates a new tour with the given name and assigns all contacts from the original tour to it.
 3. Bivago confirms the new tour has been created.
 
-### Use Case: UC15 - Find Tour Package
+---
+
+### Use Case: UC16 - Find Tour Package
 
 **MSS**
 1. User requests to find tour packages using a search query.
@@ -687,7 +685,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC16 - List All Tour Packages
+### Use Case: UC17 - List All Tour Packages
 
 **MSS**
 1. User requests to list all tour packages.
@@ -703,7 +701,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC17 - Add a Tour Package to Favourite Tours
+### Use Case: UC18 - Add a Tour Package to Favourite Tours
 
 **MSS**
 1. User requests to add a tour to favourite tours using its index in the displayed list.
@@ -724,7 +722,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC18 - Remove a Tour Package from Favourite Tours
+### Use Case: UC19 - Remove a Tour Package from Favourite Tours
 
 **MSS**
 1. User requests to remove a tour from favourite tours using its index in the displayed list.
@@ -745,7 +743,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 
 ---
 
-### Use Case: UC19 - View Favourite Tours
+### Use Case: UC20 - View Favourite Tours
 
 **MSS**
 1. User requests to view favourite tours.
@@ -759,7 +757,6 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
     - 2a1. Bivago displays an empty list indicating no favourite tours were found.
     - 2a2. Use case ends.
 
->>>>>>> master
 ---
 
 ## Non-Functional Requirements
@@ -1048,7 +1045,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one tour marked as favourite tour.
 
     1. Test case: `tour-favourite-remove 1`<br>
-       Expected: Contact is unmarked as favourite (star removed in GUI). Contact details are updated in the data file.
+       Expected: Tour is unmarked as favourite (star removed in GUI). Tour details are updated in the data file.
 
     1. Test case: Missing fields (e.g. `tour-favourite-remove`)<br>
        Expected: Error message for invalid command format.
