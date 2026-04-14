@@ -245,7 +245,7 @@ A contact can have any number of tags (including 0). Each tag must be at most 30
 * **Accommodation contacts**: `[s/STARS]` — must be `1–5` (default: `3`)
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Important:**
-Having fields that are not applicable to the specified contact type will cause the command to be rejected.
+Fields that are not applicable to the specified contact type will be rejected.
 For example, `h/true` will not apply to `person` contacts.
 </div>
 
