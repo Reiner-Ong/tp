@@ -368,7 +368,7 @@ Priorities: High (must have) — `* * *`, Medium (nice to have) — `* *`, Low (
 | `*` | tour guide with affiliated contacts | link affiliated contacts (e.g. restaurant and nearby attraction) | remember partnership deals |
 | `*` | tour guide with affiliated contacts | rate my affiliated contacts | track service quality over time |
 | `*` | tour guide with affiliated contacts | add commission or discount information to contacts | remember special arrangements |
-| `*` | tour guide who conducts tours in various locations | search contacts by location/neighbourhood | find service providers near specific attractions |
+| `*` | tour guide who conducts tours in various locations | search contacts by location/neighbourhood | find service providers near specific attractions/location |
 | `*` | tour guide who prioritizes efficiency | filter contacts by availability | quickly find who's available for a specific date |
 | `*` | tour guide who conducts many tour packages | duplicate existing tours | quickly create similar tour packages without re-entering all details |
 | `*` | tour guide who has wrist problems | alias commands I frequently use | not have to type so much |
