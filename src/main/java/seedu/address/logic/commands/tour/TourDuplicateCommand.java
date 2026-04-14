@@ -69,7 +69,7 @@ public class TourDuplicateCommand extends Command {
 
         model.addTour(newTour);
 
-        List<Contact> contacts = new ArrayList<>(model.getAddressBook().getContactList());
+        List<Contact> contacts = new ArrayList<>(model.getFilteredContactList());
         for (Contact contact : contacts) {
             if (contact.isInTour(tourToDuplicate)) {
                 model.assignTour(contact, newTour);
