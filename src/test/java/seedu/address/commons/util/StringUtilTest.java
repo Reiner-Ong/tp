@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -180,5 +181,34 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsAlphabet(" e "));
         assertTrue(StringUtil.containsAlphabet("lebron james 1337"));
         assertTrue(StringUtil.containsAlphabet("     e    (&^&@* $1 23 13^&(@#$^(   &@#(&$"));
+    }
+  
+    //---------------- Tests for normaliseTrimmedName --------------------------------------
+
+    /*
+     * EP: null, empty, one word, multiple words & single whitespace, multiple words & multiple whitespaces
+     */
+
+    @Test
+    public void normalisedTrimmedName_nullGiven_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.normaliseTrimmedName(null));
+    }
+
+    @Test
+    public void normalisedTrimmedName_validInputs_correctResult() {
+        // Empty string
+        assertEquals("", StringUtil.normaliseTrimmedName(""));
+
+        // One word
+        assertEquals("bruh", StringUtil.normaliseTrimmedName("bruh"));
+
+        // Multiple words & single whitespace
+        assertEquals("le bruh moment", StringUtil.normaliseTrimmedName("le bruh moment"));
+        assertEquals("le bron james", StringUtil.normaliseTrimmedName("le bron james"));
+
+        // Multiple words & multiple whitespaces
+        assertEquals("le     bruh   moment", StringUtil.normaliseTrimmedName("le bruh moment"));
+        assertEquals("lebron          james", StringUtil.normaliseTrimmedName("lebron james"));
+        assertEquals("la     bu    bu", StringUtil.normaliseTrimmedName("la bu bu"));
     }
 }
