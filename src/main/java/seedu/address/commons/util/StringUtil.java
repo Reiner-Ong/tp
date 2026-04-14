@@ -67,6 +67,14 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if {@code s} contains an alphabetical character.
+     */
+    public static boolean containsAlphabet(String s) {
+        requireNonNull(s);
+        return s.matches(".*[a-zA-Z].*");
+    }
+
+    /**
      * Returns a name with whitespaces normalised.
      * If there are multiple whitespaces between words, it will be normalised to a single whitespace.
      * e.g normaliseTrimmedName("Le  Bron     James") == "Le Bron James"
