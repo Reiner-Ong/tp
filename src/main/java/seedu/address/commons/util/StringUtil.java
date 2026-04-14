@@ -65,4 +65,16 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns a name with whitespaces normalised.
+     * If there are multiple whitespaces between words, it will be normalised to a single whitespace.
+     * e.g normaliseTrimmedName("Le  Bron     James") == "Le Bron James"
+     * @param name A string that has been trimmed
+     */
+    public static String normaliseTrimmedName(String name) {
+        requireNonNull(name);
+        assert name.equals(name.trim());
+        return String.join(" ", name.split("\\s+"));
+    }
 }
