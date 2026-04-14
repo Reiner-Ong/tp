@@ -80,8 +80,7 @@ public class AddCommand extends Command {
 
         assert model.hasContact(contactToAdd) : "Contact should have been added";
         logger.fine(String.format("Added contact: %s", contactToAdd));
-        String warning = Messages.getFieldOverlapWarning(model, contactToAdd, null);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(contactToAdd)) + warning);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(contactToAdd)));
     }
 
     @Override
