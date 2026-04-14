@@ -83,10 +83,10 @@ public class AccommodationTest {
         editedAccommodation = (Accommodation) ContactBuilder.fromContact(HOTEL).withName(VALID_NAME_BOB).build();
         assertFalse(HOTEL.isSameContact(editedAccommodation));
 
-        // name differs in case, all other attributes same -> returns true
+        // name differs in case, all other attributes same -> returns false
         editedAccommodation = (Accommodation) ContactBuilder.fromContact(HOTEL)
                 .withName(HOTEL.getName().fullName.toLowerCase()).build();
-        assertTrue(HOTEL.isSameContact(editedAccommodation));
+        assertFalse(HOTEL.isSameContact(editedAccommodation));
 
         // name has trailing spaces, all other attributes same -> returns false
         editedAccommodation = (Accommodation) ContactBuilder.fromContact(HOTEL)

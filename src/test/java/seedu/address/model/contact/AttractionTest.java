@@ -126,10 +126,10 @@ public class AttractionTest {
         editedAttraction = (Attraction) ContactBuilder.fromContact(USS).withName(VALID_NAME_BOB).build();
         assertFalse(USS.isSameContact(editedAttraction));
 
-        // name differs in case, all other attributes same -> returns true
+        // name differs in case, all other attributes same -> returns false
         editedAttraction = (Attraction) ContactBuilder.fromContact(USS)
                 .withName(USS.getName().fullName.toLowerCase()).build();
-        assertTrue(USS.isSameContact(editedAttraction));
+        assertFalse(USS.isSameContact(editedAttraction));
 
         // name has trailing spaces, all other attributes same -> returns false
         editedAttraction = (Attraction) ContactBuilder.fromContact(USS)
