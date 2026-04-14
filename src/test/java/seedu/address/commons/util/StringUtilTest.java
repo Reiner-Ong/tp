@@ -182,7 +182,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsAlphabet("lebron james 1337"));
         assertTrue(StringUtil.containsAlphabet("     e    (&^&@* $1 23 13^&(@#$^(   &@#(&$"));
     }
-  
+
     //---------------- Tests for normaliseTrimmedName --------------------------------------
 
     /*
@@ -207,8 +207,8 @@ public class StringUtilTest {
         assertEquals("le bron james", StringUtil.normaliseTrimmedName("le bron james"));
 
         // Multiple words & multiple whitespaces
-        assertEquals("le     bruh   moment", StringUtil.normaliseTrimmedName("le bruh moment"));
-        assertEquals("lebron          james", StringUtil.normaliseTrimmedName("lebron james"));
-        assertEquals("la     bu    bu", StringUtil.normaliseTrimmedName("la bu bu"));
+        assertEquals("le bruh moment", StringUtil.normaliseTrimmedName("le     bruh   moment"));
+        assertEquals("lebron james", StringUtil.normaliseTrimmedName("lebron          james"));
+        assertEquals("la bu bu", StringUtil.normaliseTrimmedName("la     bu    bu"));
     }
 }
